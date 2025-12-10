@@ -13,10 +13,9 @@ from rclpy.node import Node
 from geometry_msgs.msg import Vector3Stamped
 from std_msgs.msg import Float64MultiArray
 
-try:
-    from .fairino import Robot as FairinoSDK
-except ImportError:
-    FairinoSDK = None
+
+from .fairino import Robot as FairinoSDK
+
 
 # 尝试导入 VR 控制器
 
@@ -140,7 +139,8 @@ class FairinoCartRobot:
         if len(pose6) != 6:
             raise ValueError("pose6 需要 6 个元素")
         logger.info(f"发送绝对位姿: {pose6}")
-        rtn = self.robot.MoveL(desc_pos=pose6, tool=self.tool, user=self.user, vel=self._vel, blendR=self.blendR)
+        vel_abs = self._vel * 0.1
+        rtn = self.robot.MoveL(desc_pos=pose6, tool=self.tool, user=self.user, vel=vel_abs, blendR=self.blendR)
         logger.error(f"movel errcode: {rtn}")
 
     def send_delta(self, delta6: Sequence[float]):
