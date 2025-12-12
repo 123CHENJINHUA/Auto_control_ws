@@ -141,7 +141,7 @@ class FairinoCartRobot:
         logger.info(f"发送绝对位姿: {pose6}")
         vel_abs = self._vel * 0.1
         rtn = self.robot.MoveL(desc_pos=pose6, tool=self.tool, user=self.user, vel=vel_abs, blendR=self.blendR)
-        logger.error(f"movel errcode: {rtn}")
+        logger.info(f"movel errcode: {rtn}")
 
     def send_delta(self, delta6: Sequence[float]):
         if len(delta6) != 6:
