@@ -1,0 +1,99 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="dual_robot">
+    <!-- <xacro:arg name="initial_positions_file" default="initial_positions.yaml" /> -->
+
+    <xacro:include filename="$(find fairino_dual_moveit_config)/config/fairino.urdf" />
+
+    <!-- <xacro:include filename="$(find fairino_dual_moveit_config)/config/fairino_gazebo.ros2_control.xacro" /> -->
+
+    <ros2_control name="GazeboSystem" type="system">
+    <hardware>
+        <!-- By default, set up controllers for simulation. This won't work on real hardware -->
+        <plugin>gazebo_ros2_control/GazeboSystem</plugin>
+    </hardware>
+
+    <joint name="robot1_j1">
+        <command_interface name="position"/>
+        <state_interface name="position">
+            <param name="initial_value">0.0</param>
+        </state_interface>
+    </joint>
+    <joint name="robot1_j2">
+        <command_interface name="position"/>
+        <state_interface name="position">
+            <param name="initial_value">0.0</param>
+        </state_interface>
+    </joint>
+    <joint name="robot1_j3">
+        <command_interface name="position"/>
+        <state_interface name="position">
+            <param name="initial_value">0.0</param>
+        </state_interface>
+    </joint>
+    <joint name="robot1_j4">
+        <command_interface name="position"/>
+        <state_interface name="position">
+            <param name="initial_value">0.0</param>
+        </state_interface>
+    </joint>
+    <joint name="robot1_j5">
+        <command_interface name="position"/>
+        <state_interface name="position">
+            <param name="initial_value">0.0</param>
+        </state_interface>
+    </joint>
+    <joint name="robot1_j6">
+        <command_interface name="position"/>
+        <state_interface name="position">
+            <param name="initial_value">0.0</param>
+        </state_interface>
+    </joint>
+
+    <joint name="robot2_j1">
+        <command_interface name="position"/>
+        <state_interface name="position">
+            <param name="initial_value">0.0</param>
+        </state_interface>
+    </joint>
+    <joint name="robot2_j2">
+        <command_interface name="position"/>
+        <state_interface name="position">
+            <param name="initial_value">0.0</param>
+        </state_interface>
+    </joint>
+    <joint name="robot2_j3">
+        <command_interface name="position"/>
+        <state_interface name="position">
+            <param name="initial_value">0.0</param>
+        </state_interface>
+    </joint>
+    <joint name="robot2_j4">
+        <command_interface name="position"/>
+        <state_interface name="position">
+            <param name="initial_value">0.0</param>
+        </state_interface>
+    </joint>
+    <joint name="robot2_j5">
+        <command_interface name="position"/>
+        <state_interface name="position">
+            <param name="initial_value">0.0</param>
+        </state_interface>
+    </joint>
+    <joint name="robot2_j6">
+        <command_interface name="position"/>
+        <state_interface name="position">
+            <param name="initial_value">0.0</param>
+        </state_interface>
+    </joint>
+
+    </ros2_control>
+
+    <gazebo>
+        <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
+            <ros><namespace>/gazebo</namespace></ros>
+            <parameters>$(find fairino_dual_moveit_config)/config/ros2_controllers_gazebo.yaml</parameters>
+        </plugin>
+    </gazebo>
+
+
+</robot>

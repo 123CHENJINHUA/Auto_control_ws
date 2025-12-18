@@ -1,0 +1,15 @@
+# Default initial positions for fairino16_v6_robot's ros2_control fake system
+
+initial_positions:
+  robot1_j1: 0
+  robot1_j2: 0
+  robot1_j3: 0
+  robot1_j4: 0
+  robot1_j5: 0
+  robot1_j6: 0
+  robot2_j1: 0
+  robot2_j2: 0
+  robot2_j3: 0
+  robot2_j4: 0
+  robot2_j5: 0
+  robot2_j6: 0

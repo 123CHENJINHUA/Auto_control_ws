@@ -1,0 +1,34 @@
+1. 把 moviet 源码安装包添加到全局变量
+    echo "source ~/moveit2_ws/install/setup.bash" >> ~/.bashrc
+    source ~/.bashrc
+
+2. 在 moveit_controllers.yaml 文件末端添加
+    action_ns: follow_joint_trajectory
+    default: true
+
+3. 把 rviz 中 planned Path 的 Loop Animation 的勾取消
+
+4. 自带的 generate_rsp_launch(ld,moveit_config) 有点问题，需要自己发布 robot_state
+
+5. load_yaml 替换为 xacro.load_yaml()
+
+6. <!-- Used for fixing robot to Gazebo 'base_link' 将机械手的基座固定在世界坐标上-->
+    <link name="world"/>
+
+    <joint name="fixed" type="fixed">
+        <parent link="world"/>
+        <child link="base_link"/>
+    </joint>
+
+7.  <hardware>
+        <!-- By default, set up controllers for simulation. This won't work on real hardware -->
+        <plugin>gazebo_ros2_control/GazeboSystem</plugin>
+    </hardware>
+
+8.  <!-- Gazebo's ros2_control plugin -->
+    <gazebo>
+        <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
+            <parameters>$(find my_moveit_gazebo_config)/config/ros2_controllers.yaml</parameters>
+            <robot_param_node>robot_state_publisher</robot_param_node>
+        </plugin>
+    </gazebo>
