@@ -2,20 +2,8 @@ moveit_controller_manager: moveit_simple_controller_manager/MoveItSimpleControll
 
 moveit_simple_controller_manager:
   controller_names:
-    - broadcaster_robot1
     - broadcaster_robot2
-
-  broadcaster_robot1:
-    type: FollowJointTrajectory
-    joints:
-      - robot1_j1
-      - robot1_j2
-      - robot1_j3
-      - robot1_j4
-      - robot1_j5
-      - robot1_j6
-    action_ns: follow_joint_trajectory
-    default: true
+    - broadcaster_robot1
 
   broadcaster_robot2:
     type: FollowJointTrajectory
@@ -26,5 +14,17 @@ moveit_simple_controller_manager:
       - robot2_j4
       - robot2_j5
       - robot2_j6
+    action_ns: follow_joint_trajectory
+    default: true
+
+  broadcaster_robot1:
+    type: FollowJointTrajectory
+    joints:
+      - robot1_j1
+      - robot1_j2
+      - robot1_j3
+      - robot1_j4
+      - robot1_j5
+      - robot1_j6
     action_ns: follow_joint_trajectory
     default: true

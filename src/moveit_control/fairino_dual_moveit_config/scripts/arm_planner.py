@@ -35,7 +35,7 @@ class ArmPlanner(Node):
             self,
             FollowJointTrajectory,
             # 'broadcaster_robot1/follow_joint_trajectory'
-            'fairino16_controller/follow_joint_trajectory'
+            'fairino5_controller/follow_joint_trajectory'
         )
 
         # 初始化Action客户端
@@ -43,10 +43,9 @@ class ArmPlanner(Node):
             self,
             FollowJointTrajectory,
             # 'broadcaster_robot2/follow_joint_trajectory'
-            'fairino5_controller/follow_joint_trajectory'
+            'fairino16_controller/follow_joint_trajectory'
         )
-        
-        
+
         # 订阅位姿目标
         self.create_subscription(
             PoseStamped,
@@ -91,9 +90,9 @@ class ArmPlanner(Node):
 
 
         self.moveit = MoveItPy(node_name="moveit_py", config_dict=moveit_config.to_dict())
-        self.arm1 = self.moveit.get_planning_component('fairino16_v6_group')
-        self.arm2 = self.moveit.get_planning_component('fairino5_v6_group')
-
+        self.arm1 = self.moveit.get_planning_component('fairino5_v6_group')
+        self.arm2 = self.moveit.get_planning_component('fairino16_v6_group')
+        
         # self.get_logger().info(self.arm1.get_start_state())
         # self.get_logger().info(self.arm2.get_start_state())
 
@@ -118,7 +117,7 @@ class ArmPlanner(Node):
     
     def pose_callback1(self, msg):
         """位姿规划回调 - 使用OMPL规划"""
-
+        
         self.arm1.set_goal_state(pose_stamped_msg=msg, pose_link="robot1_wrist3_link")
         result = self.arm1.plan() # 使用OMPL规划
         self.execute_trajectory1(result.trajectory)
@@ -133,7 +132,7 @@ class ArmPlanner(Node):
         else:
             goal_msg.trajectory = trajectory.get_robot_trajectory_msg().joint_trajectory
             goal_msg.trajectory.joint_names = self.moveit.get_robot_model().\
-                get_joint_model_group('fairino16_v6_group').joint_model_names
+                get_joint_model_group('fairino5_v6_group').joint_model_names
             
             # 发送目标
             self.get_logger().info("planning!!!!!!!!!!!!!!!!!!!!")
@@ -145,9 +144,10 @@ class ArmPlanner(Node):
             # rclpy.spin_until_future_complete(self, result_future)
             # self.get_logger().info("complete!!!!")
 
+
     def pose_callback2(self, msg):
         """位姿规划回调 - 使用OMPL规划"""
-        
+
         self.arm2.set_goal_state(pose_stamped_msg=msg, pose_link="robot2_wrist3_link")
         result = self.arm2.plan() # 使用OMPL规划
         self.execute_trajectory2(result.trajectory)
@@ -162,7 +162,7 @@ class ArmPlanner(Node):
         else:
             goal_msg.trajectory = trajectory.get_robot_trajectory_msg().joint_trajectory
             goal_msg.trajectory.joint_names = self.moveit.get_robot_model().\
-                get_joint_model_group('fairino5_v6_group').joint_model_names
+                get_joint_model_group('fairino16_v6_group').joint_model_names
             
             # 发送目标
             self.get_logger().info("planning!!!!!!!!!!!!!!!!!!!!")
@@ -170,9 +170,10 @@ class ArmPlanner(Node):
             future = self.action_client2.send_goal_async(goal_msg)
             # rclpy.spin_until_future_complete(self, future)
             # gh = future.result()
-            # result_future = gh.get_result_async()
+            # result_future = gh.get_result_async()robot8
             # rclpy.spin_until_future_complete(self, result_future)
             # self.get_logger().info("complete!!!!")
+
 
 def main(args=None):
     rclpy.init(args=args)

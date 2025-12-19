@@ -9,50 +9,6 @@
                 <plugin>fairino_hardware/FairinoHardwareInterface</plugin>
             </hardware>
 
-            <joint name="robot1_j1">
-                <command_interface name="position"/>
-                <state_interface name="position">
-                  <param name="initial_value">${initial_positions['robot1_j1']}</param>
-                </state_interface>
-            </joint>
-            <joint name="robot1_j2">
-                <command_interface name="position"/>
-                <state_interface name="position">
-                  <param name="initial_value">${initial_positions['robot1_j2']}</param>
-                </state_interface>
-            </joint>
-            <joint name="robot1_j3">
-                <command_interface name="position"/>
-                <state_interface name="position">
-                  <param name="initial_value">${initial_positions['robot1_j3']}</param>
-                </state_interface>
-            </joint>
-            <joint name="robot1_j4">
-                <command_interface name="position"/>
-                <state_interface name="position">
-                  <param name="initial_value">${initial_positions['robot1_j4']}</param>
-                </state_interface>
-            </joint>
-            <joint name="robot1_j5">
-                <command_interface name="position"/>
-                <state_interface name="position">
-                  <param name="initial_value">${initial_positions['robot1_j5']}</param>
-                </state_interface>
-            </joint>
-            <joint name="robot1_j6">
-                <command_interface name="position"/>
-                <state_interface name="position">
-                  <param name="initial_value">${initial_positions['robot1_j6']}</param>
-                </state_interface>
-            </joint>
-
-        </ros2_control>
-
-        <ros2_control name="${name2}" type="system">
-            <hardware>
-                <plugin>fairino_hardware/FairinoHardwareInterface2</plugin>
-            </hardware>
-
             <joint name="robot2_j1">
                 <command_interface name="position"/>
                 <state_interface name="position">
@@ -87,6 +43,50 @@
                 <command_interface name="position"/>
                 <state_interface name="position">
                   <param name="initial_value">${initial_positions['robot2_j6']}</param>
+                </state_interface>
+            </joint>
+
+        </ros2_control>
+
+        <ros2_control name="${name2}" type="system">
+            <hardware>
+                <plugin>fairino_hardware/FairinoHardwareInterface2</plugin>
+            </hardware>
+
+            <joint name="robot1_j1">
+                <command_interface name="position"/>
+                <state_interface name="position">
+                  <param name="initial_value">${initial_positions['robot1_j1']}</param>
+                </state_interface>
+            </joint>
+            <joint name="robot1_j2">
+                <command_interface name="position"/>
+                <state_interface name="position">
+                  <param name="initial_value">${initial_positions['robot1_j2']}</param>
+                </state_interface>
+            </joint>
+            <joint name="robot1_j3">
+                <command_interface name="position"/>
+                <state_interface name="position">
+                  <param name="initial_value">${initial_positions['robot1_j3']}</param>
+                </state_interface>
+            </joint>
+            <joint name="robot1_j4">
+                <command_interface name="position"/>
+                <state_interface name="position">
+                  <param name="initial_value">${initial_positions['robot1_j4']}</param>
+                </state_interface>
+            </joint>
+            <joint name="robot1_j5">
+                <command_interface name="position"/>
+                <state_interface name="position">
+                  <param name="initial_value">${initial_positions['robot1_j5']}</param>
+                </state_interface>
+            </joint>
+            <joint name="robot1_j6">
+                <command_interface name="position"/>
+                <state_interface name="position">
+                  <param name="initial_value">${initial_positions['robot1_j6']}</param>
                 </state_interface>
             </joint>
         </ros2_control>

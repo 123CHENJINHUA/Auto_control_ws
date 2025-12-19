@@ -14,8 +14,8 @@ class RobustSerialBroadcaster(Node):
         super().__init__(node_name)
 
 
-        self.client1 = ActionClient(self, FollowJointTrajectory,'/fairino16_controller/follow_joint_trajectory')
-        self.client2 = ActionClient(self, FollowJointTrajectory,'/gazebo/fairino16_controller/follow_joint_trajectory')
+        self.client1 = ActionClient(self, FollowJointTrajectory,'/fairino5_controller/follow_joint_trajectory')
+        self.client2 = ActionClient(self, FollowJointTrajectory,'/gazebo/fairino5_controller/follow_joint_trajectory')
 
         self._action_server = ActionServer(
             self,
@@ -34,7 +34,7 @@ class RobustSerialBroadcaster(Node):
         
         future1 = self.client1.send_goal_async(goal_msg)
         future2 = self.client2.send_goal_async(goal_msg)
-        
+
         # 2. 等待两个目标都被接受
         rclpy.spin_until_future_complete(self, future1)
         rclpy.spin_until_future_complete(self, future2)
@@ -48,16 +48,11 @@ class RobustSerialBroadcaster(Node):
         # 3. 等待两个任务都执行出最终结果
         result_future1 = gh1.get_result_async()
         result_future2 = gh2.get_result_async()
-
-        self.get_logger().info("planning!!!!!!!!!!!!!!!!!!!!")
         rclpy.spin_until_future_complete(self, result_future1)
-        self.get_logger().info("1 finish planning!!!!!!!!!!!!!!!!!!!!")
         rclpy.spin_until_future_complete(self, result_future2)
-        self.get_logger().info("2 finish planning!!!!!!!!!!!!!!!!!!!!")
         final_result1 = result_future1.result().result
         final_result2 = result_future2.result().result
 
-        # 4. 综合两个结果
         
         result = FollowJointTrajectory.Result()
         goal_handle.succeed()
@@ -78,7 +73,7 @@ class RobustSerialBroadcaster(Node):
         # self.get_logger().info("return")
         # return result
 
-def main_robot1(args=None):
+def main_robot2(args=None):
 
     rclpy.init(args=args)
     
@@ -91,4 +86,4 @@ def main_robot1(args=None):
     rclpy.shutdown()
 
 if __name__ == '__main__':
-    main_robot1()
+    main_robot2()

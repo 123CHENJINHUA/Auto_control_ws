@@ -251,24 +251,24 @@ def launch_setup(context, *args, **kwargs):
 #######################################################################################################
 
     # 转发结点，将moveit的结果转发至两个systems
-    broadcaster_robot1_node = Node(
-        package='fairino_dual_moveit_config',
-        executable='broadcaster_robot1.py', 
-        name='broadcaster_robot1',
-        output='screen',
-        parameters=[{'use_sim_time': True}]
-    )
-
     broadcaster_robot2_node = Node(
         package='fairino_dual_moveit_config',
-        executable='broadcaster_robot2.py',
+        executable='broadcaster_robot2.py', 
         name='broadcaster_robot2',
         output='screen',
         parameters=[{'use_sim_time': True}]
     )
 
+    broadcaster_robot1_node = Node(
+        package='fairino_dual_moveit_config',
+        executable='broadcaster_robot1.py',
+        name='broadcaster_robot1',
+        output='screen',
+        parameters=[{'use_sim_time': True}]
+    )
 
 
-    return nodes_to_start + goal_list + [broadcaster_robot1_node,broadcaster_robot2_node]
+
+    return nodes_to_start + goal_list + [broadcaster_robot2_node,broadcaster_robot1_node]
     # return nodes_to_start
 

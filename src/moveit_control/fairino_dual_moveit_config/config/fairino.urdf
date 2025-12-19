@@ -148,31 +148,31 @@
 
   <joint name="fixed1" type="fixed">
       <parent link="cam"/>
-      <child link="robot1_base_link"/>
+      <child link="robot2_base_link"/>
       <origin xyz="0.162 0.272 -0.14" rpy="1.57  0.0  1.57"/>
   </joint>
 
   <joint name="fixed2" type="fixed">
       <parent link="cam"/>
-      <child link="robot2_base_link"/>
+      <child link="robot1_base_link"/>
       <origin xyz="-0.11406305  0.12505026 -0.140" rpy="0.0 -1.57  0.0"/>
   </joint>  
 
   <joint name="fixed3" type="fixed">
-      <parent link="robot1_wrist3_link"/>
+      <parent link="robot2_wrist3_link"/>
       <child link="end1"/>
       <origin xyz="-0.08 -0.06 0.23 " rpy="0  1.57  0"/>
   </joint>
 
   <joint name="fixed4" type="fixed">
-      <parent link="robot2_wrist3_link"/>
+      <parent link="robot1_wrist3_link"/>
       <child link="end2"/>
       <origin xyz="-0.05 -0.05 0.101" rpy="0.0 0.0  0.0"/>
   </joint>  
 
 
   <link
-    name="robot1_base_link">
+    name="robot2_base_link">
     <inertial>
       <origin
         xyz="-0.00017171 -0.00016075 0.041272"
@@ -212,7 +212,7 @@
     </collision>
   </link>
   <link
-    name="robot1_shoulder_link">
+    name="robot2_shoulder_link">
     <inertial>
       <origin
         xyz="2.6949E-07 -0.0077161 0.17504"
@@ -252,15 +252,15 @@
     </collision>
   </link>
   <joint
-    name="robot1_j1"
+    name="robot2_j1"
     type="revolute">
     <origin
       xyz="0 0 0"
       rpy="0 0 0" />
     <parent
-      link="robot1_base_link" />
+      link="robot2_base_link" />
     <child
-      link="robot1_shoulder_link" />
+      link="robot2_shoulder_link" />
     <axis
       xyz="0 0 1" />
     <limit
@@ -281,7 +281,7 @@
       k_velocity="40.0" />
   </joint>
   <link
-    name="robot1_upperarm_link">
+    name="robot2_upperarm_link">
     <inertial>
       <origin
         xyz="-0.20845 -1.0388E-06 0.18245"
@@ -321,15 +321,15 @@
     </collision>
   </link>
   <joint
-    name="robot1_j2"
+    name="robot2_j2"
     type="revolute">
     <origin
       xyz="0 0 0.18"
       rpy="1.5708 0 0" />
     <parent
-      link="robot1_shoulder_link" />
+      link="robot2_shoulder_link" />
     <child
-      link="robot1_upperarm_link" />
+      link="robot2_upperarm_link" />
     <axis
       xyz="0 0 1" />
     <limit
@@ -350,7 +350,7 @@
       k_velocity="40.0" />
   </joint>
   <link
-    name="robot1_forearm_link">
+    name="robot2_forearm_link">
     <inertial>
       <origin
         xyz="-0.23441 5.6569E-07 0.048131"
@@ -390,15 +390,15 @@
     </collision>
   </link>
   <joint
-    name="robot1_j3"
+    name="robot2_j3"
     type="revolute">
     <origin
       xyz="-0.52 0 0"
       rpy="0 0 0" />
     <parent
-      link="robot1_upperarm_link" />
+      link="robot2_upperarm_link" />
     <child
-      link="robot1_forearm_link" />
+      link="robot2_forearm_link" />
     <axis
       xyz="0 0 1" />
     <limit
@@ -419,7 +419,7 @@
       k_velocity="40.0" />
   </joint>
   <link
-    name="robot1_wrist1_link">
+    name="robot2_wrist1_link">
     <inertial>
       <origin
         xyz="2.4949E-07 -0.002597 0.1549"
@@ -459,15 +459,15 @@
     </collision>
   </link>
   <joint
-    name="robot1_j4"
+    name="robot2_j4"
     type="revolute">
     <origin
       xyz="-0.4 0 0"
       rpy="0 0 0" />
     <parent
-      link="robot1_forearm_link" />
+      link="robot2_forearm_link" />
     <child
-      link="robot1_wrist1_link" />
+      link="robot2_wrist1_link" />
     <axis
       xyz="0 0 1" />
     <limit
@@ -488,7 +488,7 @@
       k_velocity="40.0" />
   </joint>
   <link
-    name="robot1_wrist2_link">
+    name="robot2_wrist2_link">
     <inertial>
       <origin
         xyz="-2.4949E-07 0.002597 0.1099"
@@ -528,15 +528,15 @@
     </collision>
   </link>
   <joint
-    name="robot1_j5"
+    name="robot2_j5"
     type="revolute">
     <origin
       xyz="0 0 0.159"
       rpy="1.5708 0 0" />
     <parent
-      link="robot1_wrist1_link" />
+      link="robot2_wrist1_link" />
     <child
-      link="robot1_wrist2_link" />
+      link="robot2_wrist2_link" />
     <axis
       xyz="0 0 1" />
     <limit
@@ -557,7 +557,7 @@
       k_velocity="40.0" />
   </joint>
   <link
-    name="robot1_wrist3_link">
+    name="robot2_wrist3_link">
     <inertial>
       <origin
         xyz="-8.7063E-06 -3.2122E-05 0.082426"
@@ -597,15 +597,15 @@
     </collision>
   </link>
   <joint
-    name="robot1_j6"
+    name="robot2_j6"
     type="revolute">
     <origin
       xyz="0 0 0.114"
       rpy="-1.5708 0 0" />
     <parent
-      link="robot1_wrist2_link" />
+      link="robot2_wrist2_link" />
     <child
-      link="robot1_wrist3_link" />
+      link="robot2_wrist3_link" />
     <axis
       xyz="0 0 1" />
     <limit
@@ -638,7 +638,7 @@
 
 
   <link
-    name="robot2_base_link">
+    name="robot1_base_link">
     <inertial>
       <origin
         xyz="-0.00031896 -0.00029673 0.042463"
@@ -678,7 +678,7 @@
     </collision>
   </link>
   <link
-    name="robot2_shoulder_link">
+    name="robot1_shoulder_link">
     <inertial>
       <origin
         xyz="5.0029E-07 -0.0040922 0.14629"
@@ -718,15 +718,15 @@
     </collision>
   </link>
   <joint
-    name="robot2_j1"
+    name="robot1_j1"
     type="revolute">
     <origin
       xyz="0 0 0"
       rpy="0 0 0" />
     <parent
-      link="robot2_base_link" />
+      link="robot1_base_link" />
     <child
-      link="robot2_shoulder_link" />
+      link="robot1_shoulder_link" />
     <axis
       xyz="0 0 1" />
     <limit
@@ -747,7 +747,7 @@
       k_velocity="10" />
   </joint>
   <link
-    name="robot2_upperarm_link">
+    name="robot1_upperarm_link">
     <inertial>
       <origin
         xyz="-0.2125 -5.7643E-09 0.1346"
@@ -787,15 +787,15 @@
     </collision>
   </link>
   <joint
-    name="robot2_j2"
+    name="robot1_j2"
     type="revolute">
     <origin
       xyz="0 0 0.152"
       rpy="1.5708 0 0" />
     <parent
-      link="robot2_shoulder_link" />
+      link="robot1_shoulder_link" />
     <child
-      link="robot2_upperarm_link" />
+      link="robot1_upperarm_link" />
     <axis
       xyz="0 0 1" />
     <limit
@@ -816,7 +816,7 @@
       k_velocity="10" />
   </joint>
   <link
-    name="robot2_forearm_link">
+    name="robot1_forearm_link">
     <inertial>
       <origin
         xyz="-0.18793 -8.4503E-07 0.0066357"
@@ -856,15 +856,15 @@
     </collision>
   </link>
   <joint
-    name="robot2_j3"
+    name="robot1_j3"
     type="revolute">
     <origin
       xyz="-0.425 0 0"
       rpy="0 0 0" />
     <parent
-      link="robot2_upperarm_link" />
+      link="robot1_upperarm_link" />
     <child
-      link="robot2_forearm_link" />
+      link="robot1_forearm_link" />
     <axis
       xyz="0 0 1" />
     <limit
@@ -885,7 +885,7 @@
       k_velocity="10" />
   </joint>
   <link
-    name="robot2_wrist1_link">
+    name="robot1_wrist1_link">
     <inertial>
       <origin
         xyz="4.98E-07 -0.003754 0.097155"
@@ -925,15 +925,15 @@
     </collision>
   </link>
   <joint
-    name="robot2_j4"
+    name="robot1_j4"
     type="revolute">
     <origin
       xyz="-0.39501 0 0"
       rpy="0 0 0" />
     <parent
-      link="robot2_forearm_link" />
+      link="robot1_forearm_link" />
     <child
-      link="robot2_wrist1_link" />
+      link="robot1_wrist1_link" />
     <axis
       xyz="0 0 1" />
     <limit
@@ -954,7 +954,7 @@
       k_velocity="10" />
   </joint>
   <link
-    name="robot2_wrist2_link">
+    name="robot1_wrist2_link">
     <inertial>
       <origin
         xyz="-4.5588E-07 0.0038617 0.098257"
@@ -994,15 +994,15 @@
     </collision>
   </link>
   <joint
-    name="robot2_j5"
+    name="robot1_j5"
     type="revolute">
     <origin
       xyz="0 0 0.1021"
       rpy="1.5708 0 0" />
     <parent
-      link="robot2_wrist1_link" />
+      link="robot1_wrist1_link" />
     <child
-      link="robot2_wrist2_link" />
+      link="robot1_wrist2_link" />
     <axis
       xyz="0 0 1" />
     <limit
@@ -1023,7 +1023,7 @@
       k_velocity="10" />
   </joint>
   <link
-    name="robot2_wrist3_link">
+    name="robot1_wrist3_link">
     <inertial>
       <origin
         xyz="7.7496E-05 1.7751E-05 0.076122"
@@ -1063,15 +1063,15 @@
     </collision>
   </link>
   <joint
-    name="robot2_j6"
+    name="robot1_j6"
     type="revolute">
     <origin
       xyz="0 0 0.102"
       rpy="-1.5708 0 0" />
     <parent
-      link="robot2_wrist2_link" />
+      link="robot1_wrist2_link" />
     <child
-      link="robot2_wrist3_link" />
+      link="robot1_wrist3_link" />
     <axis
       xyz="0 0 1" />
     <limit
