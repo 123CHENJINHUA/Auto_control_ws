@@ -118,7 +118,7 @@ class ArmPlanner(Node):
     def pose_callback1(self, msg):
         """位姿规划回调 - 使用OMPL规划"""
         
-        self.arm1.set_goal_state(pose_stamped_msg=msg, pose_link="robot1_wrist3_link")
+        self.arm1.set_goal_state(pose_stamped_msg=msg, pose_link="tcp1")
         result = self.arm1.plan() # 使用OMPL规划
         self.execute_trajectory1(result.trajectory)
 
@@ -148,7 +148,7 @@ class ArmPlanner(Node):
     def pose_callback2(self, msg):
         """位姿规划回调 - 使用OMPL规划"""
 
-        self.arm2.set_goal_state(pose_stamped_msg=msg, pose_link="robot2_wrist3_link")
+        self.arm2.set_goal_state(pose_stamped_msg=msg, pose_link="tcp2")
         result = self.arm2.plan() # 使用OMPL规划
         self.execute_trajectory2(result.trajectory)
 
