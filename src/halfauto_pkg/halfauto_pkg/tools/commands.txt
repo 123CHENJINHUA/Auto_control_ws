@@ -1,0 +1,27 @@
+# 常用命令列表（来自 Core/Src/tcpclient.c）
+# 每条命令一行；在测试时通常以回车/换行（\n）结尾发送。
+# 设备大多数命令会返回 "finish\r\n" 并在 UART 打印状态信息。
+
+hello?
+startDrill
+stopDrill
+slowShunScrew
+mediumShunScrew
+fastShunScrew
+slowNiScrew
+mediumNiScrew
+fastNiScrew
+STOPSCREW
+
+# 说明：
+# - hello? : 测试性命令，设备会回复提示信息并返回 "hi, i am here\r\n"。
+# - startDrill / stopDrill : 启动/停止钻头（示例中通过 GPIO 控制紫外灯）
+# - slow/medium/fast ShunScrew / NiScrew : 控制第一号电机不同速度的正/反转（Shun = 顺，Ni = 逆）
+# - STOPSCREW : 停止电机
+
+# 使用示例（配合 tools/tcp_command_tool.py）：
+# 作为 client 从文件读取并发送一次：
+# python3 tools/tcp_command_tool.py client --host 192.168.0.100 --port 5001 --commands-file tools/commands.txt --interval 0.5 --repeat 1 --newline
+
+# 作为 server 在 PC 上按顺序发送命令（MCU 的 tcpclient 会连接到此 server）：
+# python3 tools/tcp_command_tool.py server --port 5001 --commands-file tools/commands.txt --interval 1.0 --newline

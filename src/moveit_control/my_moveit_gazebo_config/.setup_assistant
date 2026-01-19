@@ -1,0 +1,10 @@
+moveit_setup_assistant_config:
+  urdf:
+    package: robot_urdf
+    relative_path: urdf/fairino5_v6.urdf
+  srdf:
+    relative_path: config/fairino5_v6_robot.srdf
+  package_settings:
+    author_name: CJH
+    author_email: jchenjb@connect.ust.hk
+    generated_timestamp: 1743435947

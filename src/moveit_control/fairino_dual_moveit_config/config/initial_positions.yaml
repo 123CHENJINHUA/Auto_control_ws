@@ -1,0 +1,15 @@
+# Default initial positions for fairino16_v6_robot's ros2_control fake system
+
+initial_positions:
+  robot1_j1: 2.621
+  robot1_j2: -0.672
+  robot1_j3: 1.879
+  robot1_j4: -1.207
+  robot1_j5: 1.236
+  robot1_j6: 0
+  robot2_j1: -1.233
+  robot2_j2: -0.760
+  robot2_j3: 1.589
+  robot2_j4: -0.829
+  robot2_j5: 1.887
+  robot2_j6: 0

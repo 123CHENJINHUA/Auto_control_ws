@@ -1,0 +1,69 @@
+# This config file is used by ros2_control
+controller_manager:
+  ros__parameters:
+    update_rate: 100 # Hz
+
+
+    fairino16_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
+    fairino5_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+
+    fairino16_controller_servo:
+      type: position_controllers/JointGroupPositionController
+
+    fairino5_controller_servo:
+      type: position_controllers/JointGroupPositionController
+
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+      publish_rate: 100.0 
+
+fairino16_controller:
+  ros__parameters:
+    joints:
+      - robot2_j1
+      - robot2_j2
+      - robot2_j3
+      - robot2_j4
+      - robot2_j5
+      - robot2_j6
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+
+fairino5_controller:
+  ros__parameters:
+    joints:
+      - robot1_j1
+      - robot1_j2
+      - robot1_j3
+      - robot1_j4
+      - robot1_j5
+      - robot1_j6
+    command_interfaces:
+      - position
+    state_interfaces:
+      - position
+
+fairino16_controller_servo:
+  ros__parameters:
+    joints:
+      - robot2_j1
+      - robot2_j2
+      - robot2_j3
+      - robot2_j4
+      - robot2_j5
+      - robot2_j6
+
+fairino5_controller_servo:
+  ros__parameters:
+    joints:
+      - robot1_j1
+      - robot1_j2
+      - robot1_j3
+      - robot1_j4
+      - robot1_j5
+      - robot1_j6
