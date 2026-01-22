@@ -1,0 +1,5 @@
+string cmd
+---
+string status
+RobotPose target_pose
+float32 use_time
