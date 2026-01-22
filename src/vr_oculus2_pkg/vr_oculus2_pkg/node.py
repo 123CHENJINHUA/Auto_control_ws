@@ -5,6 +5,7 @@ from typing import Optional
 import rclpy
 from rclpy.node import Node
 from std_msgs.msg import String
+from geometry_msgs.msg import Vector3
 
 
 class VRNode(Node):
@@ -24,6 +25,7 @@ class VRNode(Node):
         self.pub = self.create_publisher(String, topic, 10)
         self.pub_left = self.create_publisher(String, left_topic, 10)
         self.pub_right = self.create_publisher(String, right_topic, 10)
+        self.gripper_pub = self.create_publisher(Vector3, '/gripper/cmd_percent', 10)
 
         # Import controller from existing package to avoid duplication
         try:
@@ -60,6 +62,23 @@ class VRNode(Node):
             msg_right = String()
             msg_right.data = json.dumps(right_action, ensure_ascii=False)
             self.pub_right.publish(msg_right)
+
+            # Publish rightTrig to gripper/cmd_percent
+            buttons = action.get('buttons', {})
+            if 'rightTrig' in buttons:
+                val = buttons['rightTrig']
+                if isinstance(val, (tuple, list)):
+                    val = val[0]
+                try:
+                    grip_val = float(1-val)
+                except (ValueError, TypeError):
+                    grip_val = 1.0
+
+                gripper_msg = Vector3()
+                gripper_msg.x = grip_val * 100.0  # position_percent (0~100)
+                gripper_msg.y = 50.0              # speed_percent
+                gripper_msg.z = 0.0               # wait_for_completion: 0 (no wait)
+                self.gripper_pub.publish(gripper_msg)
 
         except Exception as e:
             self.get_logger().warn(f'Error while reading/publishing VR action: {e}')

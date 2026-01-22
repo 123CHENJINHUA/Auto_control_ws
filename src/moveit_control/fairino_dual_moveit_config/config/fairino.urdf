@@ -134,7 +134,7 @@
   <joint name="wall_fixed" type="fixed">
     <parent link="world"/> <!-- 假设已有名为"world"的基准连杆 -->
     <child link="wall"/>
-    <origin xyz="0 0.8 0.2" rpy="-0.2 0 0"/> <!-- 墙的位置（相对于父连杆） -->
+    <origin xyz="0 0.55 0.2" rpy="-0.261 0 0"/> <!-- 墙的位置（相对于父连杆） -->
   </joint>
 
   <joint name="fixed" type="fixed">
@@ -152,25 +152,25 @@
   <joint name="fixed1" type="fixed">
       <parent link="cam"/>
       <child link="robot2_base_link"/>
-      <origin xyz="0.162 0.202 -0.14" rpy="1.57  0.0  1.57"/>
+      <origin xyz="0.162 0.152 -0.14" rpy="1.57  0.0  1.57"/>
   </joint>
 
   <joint name="fixed2" type="fixed">
       <parent link="cam"/>
       <child link="robot1_base_link"/>
-      <origin xyz="-0.11406305  0.12505026 -0.140" rpy="0.0 -1.57  0.0"/>
+      <origin xyz="-0.09806305  0.06005026 -0.140" rpy="0.0 -1.57  0.0"/>
   </joint>  
 
   <joint name="fixed3" type="fixed">
       <parent link="robot2_wrist3_link"/>
       <child link="end2"/>
-      <origin xyz="-0.08 -0.06 0.23 " rpy="0  1.57  0"/>
+      <origin xyz="-0.00 -0.00 0.11 " rpy="0  0.0 3.14159"/>
   </joint>
 
   <joint name="fixed4" type="fixed">
       <parent link="robot1_wrist3_link"/>
       <child link="end1"/>
-      <origin xyz="-0.05 -0.05 0.101" rpy="0.0 0.0  0.0"/>
+      <origin xyz="-0.00 -0.0 0.101" rpy="0.0 0.0 -0.785"/>
   </joint>  
 
   <joint name="fixed5" type="fixed">
@@ -202,7 +202,7 @@
         izz="0.0063729" />
     </inertial>
     <visual>
-      <origin
+      <origin8
         xyz="0 0 0"
         rpy="0 0 0" />
       <geometry>

@@ -165,8 +165,8 @@ private:
   double joint_vel_cmd_;
 };
 
-// KeyboardServo::KeyboardServo() : frame_to_publish_(BASE_FRAME_ID), joint_vel_cmd_(1.0)
-KeyboardServo::KeyboardServo() : joint_vel_cmd_(1.0)
+// KeyboardServo::KeyboardServo() : frame_to_publish_(BASE_FRAME_ID), joint_vel_cmd_(0.05)
+KeyboardServo::KeyboardServo() : joint_vel_cmd_(0.05)
 
 {
   nh_ = rclcpp::Node::make_shared("servo_keyboard_input");
@@ -255,32 +255,32 @@ int KeyboardServo::keyLoop()
     {
       case KEYCODE_A:
         RCLCPP_DEBUG(nh_->get_logger(), "LEFT");
-        twist_msg1->twist.linear.z = 1.0;
+        twist_msg1->twist.linear.z = 0.05;
         publish_twist1 = true;
         break;
       case KEYCODE_D:
         RCLCPP_DEBUG(nh_->get_logger(), "RIGHT");
-        twist_msg1->twist.linear.z = -1.0;
+        twist_msg1->twist.linear.z = -0.05;
         publish_twist1 = true;
         break;
       case KEYCODE_W:
         RCLCPP_DEBUG(nh_->get_logger(), "UP");
-        twist_msg1->twist.linear.y = -1.0;
+        twist_msg1->twist.linear.y = -0.05;
         publish_twist1 = true;
         break;
       case KEYCODE_S:
         RCLCPP_DEBUG(nh_->get_logger(), "DOWN");
-        twist_msg1->twist.linear.y = 1.0;
+        twist_msg1->twist.linear.y = 0.05;
         publish_twist1 = true;
         break;
       case KEYCODE_Q:
         RCLCPP_DEBUG(nh_->get_logger(), "PERIOD");
-        twist_msg1->twist.linear.x = -1.0;
+        twist_msg1->twist.linear.x = -0.05;
         publish_twist1 = true;
         break;
       case KEYCODE_E:
         RCLCPP_DEBUG(nh_->get_logger(), "SEMICOLON");
-        twist_msg1->twist.linear.x = 1.0;
+        twist_msg1->twist.linear.x = 0.05;
         publish_twist1 = true;
         break;
       case KEYCODE_Z:
@@ -356,32 +356,32 @@ int KeyboardServo::keyLoop()
 
       case KEYCODE_J:
         RCLCPP_DEBUG(nh_->get_logger(), "LEFT");
-        twist_msg2->twist.linear.z = -1.0;
+        twist_msg2->twist.linear.z = -0.05;
         publish_twist2 = true;
         break;
       case KEYCODE_L:
         RCLCPP_DEBUG(nh_->get_logger(), "RIGHT");
-        twist_msg2->twist.linear.z = 1.0;
+        twist_msg2->twist.linear.z = 0.05;
         publish_twist2 = true;
         break;
       case KEYCODE_I:
         RCLCPP_DEBUG(nh_->get_logger(), "UP");
-        twist_msg2->twist.linear.x = -1.0;
+        twist_msg2->twist.linear.x = -0.05;
         publish_twist2 = true;
         break;
       case KEYCODE_K:
         RCLCPP_DEBUG(nh_->get_logger(), "DOWN");
-        twist_msg2->twist.linear.x = 1.0;
+        twist_msg2->twist.linear.x = 0.05;
         publish_twist2 = true;
         break;
       case KEYCODE_U:
         RCLCPP_DEBUG(nh_->get_logger(), "PERIOD");
-        twist_msg2->twist.linear.y = -1.0;
+        twist_msg2->twist.linear.y = -0.05;
         publish_twist2 = true;
         break;
       case KEYCODE_O:
         RCLCPP_DEBUG(nh_->get_logger(), "SEMICOLON");
-        twist_msg2->twist.linear.y = 1.0;
+        twist_msg2->twist.linear.y = 0.05;
         publish_twist2 = true;
         break;
       case KEYCODE_M:
