@@ -262,6 +262,11 @@ def launch_setup(context, *args, **kwargs):
         output='screen',
     )
 
+    Transform = Node(
+        package='fairino_dual_moveit_config',
+        executable='transform_robot.py',
+        output='screen',
+    )
 
     nodes_to_start = [
         config_pkg,
@@ -281,7 +286,8 @@ def launch_setup(context, *args, **kwargs):
         call_service2,
         configure_after_load5,
         configure_after_load16,
-        VR
+        VR,
+        Transform
     ]
 
 ########################################################################################################

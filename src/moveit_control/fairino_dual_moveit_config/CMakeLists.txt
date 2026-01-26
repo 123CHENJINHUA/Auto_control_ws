@@ -32,6 +32,7 @@ install(PROGRAMS
   scripts/broadcaster_robot2.py
   scripts/arm_planner.py
   scripts/vr_node.py
+  scripts/transform_robot.py
   DESTINATION lib/${PROJECT_NAME}
 )
 

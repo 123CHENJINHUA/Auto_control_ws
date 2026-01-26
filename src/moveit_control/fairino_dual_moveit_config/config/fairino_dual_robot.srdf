@@ -26,6 +26,7 @@
         <chain base_link="robot1_base_link" tip_link="robot1_wrist3_link"/>
     </group>
 
+    <disable_collisions link1="base_dual_arm" link2="cube_link1" reason="Never"/>
 
     <!--DISABLE COLLISIONS: By default it is assumed that any link of the robot could potentially come into collision with any other link in the robot. This tag disables collision checking between a specified pair of links. -->
     <disable_collisions link1="robot2_base_link" link2="robot2_shoulder_link" reason="Adjacent"/>
@@ -61,10 +62,10 @@
     <disable_collisions link1="robot2_wrist3_link" link2="tcp2" reason="Adjacent"/>
 
 
-<!-- Temporary disable. Dangerous!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!-->
+<!-- Temporary disable. Dangerous!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     <disable_collisions link1="robot2_wrist3_link" link2="end2" reason="Adjacent"/>
     <disable_collisions link1="robot2_wrist2_link" link2="end2" reason="Adjacent"/>
-    <disable_collisions link1="robot2_wrist1_link" link2="end2" reason="Adjacent"/>
+    <disable_collisions link1="robot2_wrist1_link" link2="end2" reason="Adjacent"/> -->
 
 
 

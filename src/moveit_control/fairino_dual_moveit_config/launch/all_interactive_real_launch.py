@@ -150,7 +150,7 @@ def launch_setup(context, *args, **kwargs):
 
 ########################################################################################################
 
-    package_name = 'fairino_dual_moveit_config'  # 替换为你的包名
+    package_name = 'fairino_dual_moveit_config'  # 替换为你的包05名
     urdf_file_name = 'fairino_dual_robot_gazebo.xacro'  # 替换为你的URDF文件名
 
     goal_list = []
@@ -219,7 +219,7 @@ def launch_setup(context, *args, **kwargs):
 
     # goal_list.append(action_declare_arg_model_path)
     # goal_list.append(action_robot_state_publisher)
-    # goal_list.append(action_spawn_entity)
+    # goal_list.append(action_spawn_entity)05
     # goal_list.append(action_load_controller1)
     # goal_list.append(action_load_controller2)
     # goal_list.append(action_load_broadcaster)

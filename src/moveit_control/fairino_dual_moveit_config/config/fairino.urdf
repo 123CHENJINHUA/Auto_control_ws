@@ -131,6 +131,118 @@
     </inertial>
   </link>
 
+  <!-- 定义方块连杆 -->
+  <link name="cube_link1">
+    <!-- 视觉属性 -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.4 0.2 0.8"/>  <!-- 长宽高各0.1米 -->
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <!-- 碰撞属性 -->
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.4 0.2 0.8"/>
+      </geometry>
+    </collision>
+    <!-- 惯性属性 -->
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1.0"/>  <!-- 质量1kg -->
+      <inertia
+        ixx="0.001666" ixy="0.0" ixz="0.0"
+        iyy="0.001666" iyz="0.0"
+        izz="0.001666"/>
+    </inertial>
+  </link>
+
+  <!-- 定义方块连杆 -->
+  <link name="cube_link2">
+    <!-- 视觉属性 -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.19 0.6 0.8"/>  <!-- 长宽高各0.1米 -->
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <!-- 碰撞属性 -->
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.19 0.6 0.8"/>
+      </geometry>
+    </collision>
+    <!-- 惯性属性 -->
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1.0"/>  <!-- 质量1kg -->
+      <inertia
+        ixx="0.001666" ixy="0.0" ixz="0.0"
+        iyy="0.001666" iyz="0.0"
+        izz="0.001666"/>
+    </inertial>
+  </link>
+
+  <!-- 定义方块连杆 -->
+  <link name="cube_link3">
+    <!-- 视觉属性 -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.19 0.6 0.8"/>  <!-- 长宽高各0.1米 -->
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <!-- 碰撞属性 -->
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.19 0.6 0.8"/>
+      </geometry>
+    </collision>
+    <!-- 惯性属性 -->
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1.0"/>  <!-- 质量1kg -->
+      <inertia
+        ixx="0.001666" ixy="0.0" ixz="0.0"
+        iyy="0.001666" iyz="0.0"
+        izz="0.001666"/>
+    </inertial>
+  </link>
+
+
+  <joint name="cube1_fixed" type="fixed">
+    <parent link="base_dual_arm"/> <!-- 假设已有名为"world"的基准连杆 -->
+    <child link="cube_link1"/>
+    <origin xyz="0.20 0.85 0.95" rpy="0 0 0"/> <!-- 墙的位置（相对于父连杆） -->
+  </joint>
+
+
+  <joint name="cube2_fixed" type="fixed">
+    <parent link="wall"/> <!-- 假设已有名为"world"的基准连杆 -->
+    <child link="cube_link2"/>
+    <origin xyz="-1.1 0 0.95" rpy="0 0 0"/> <!-- 墙的位置（相对于父连杆） -->
+  </joint>
+
+
+  <joint name="cube3_fixed" type="fixed">
+    <parent link="wall"/> <!-- 假设已有名为"world"的基准连杆 -->
+    <child link="cube_link3"/>
+    <origin xyz="1.1 0 0.95" rpy="0 0 0"/> <!-- 墙的位置（相对于父连杆） -->
+  </joint>
+
+
   <joint name="wall_fixed" type="fixed">
     <parent link="world"/> <!-- 假设已有名为"world"的基准连杆 -->
     <child link="wall"/>
@@ -152,7 +264,7 @@
   <joint name="fixed1" type="fixed">
       <parent link="cam"/>
       <child link="robot2_base_link"/>
-      <origin xyz="0.162 0.152 -0.14" rpy="1.57  0.0  1.57"/>
+      <origin xyz="0.162 0.107 -0.14" rpy="1.57  0.785  1.57"/>
   </joint>
 
   <joint name="fixed2" type="fixed">
@@ -170,7 +282,7 @@
   <joint name="fixed4" type="fixed">
       <parent link="robot1_wrist3_link"/>
       <child link="end1"/>
-      <origin xyz="-0.00 -0.0 0.101" rpy="0.0 0.0 -0.785"/>
+      <origin xyz="-0.00 -0.0 0.101" rpy="0.0 0.0 -3.14"/>
   </joint>  
 
   <joint name="fixed5" type="fixed">
@@ -202,7 +314,7 @@
         izz="0.0063729" />
     </inertial>
     <visual>
-      <origin8
+      <origin
         xyz="0 0 0"
         rpy="0 0 0" />
       <geometry>
