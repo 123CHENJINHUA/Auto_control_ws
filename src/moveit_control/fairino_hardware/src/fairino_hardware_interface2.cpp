@@ -194,9 +194,28 @@ hardware_interface::return_type FairinoHardwareInterface2::write(const rclcpp::T
         }
         // RCLCPP_INFO(rclcpp::get_logger("FairinoHardwareInterface2"), "ServoJ下发位置:%f,%f,%f,%f,%f,%f",\
             state_data.jPos[0],state_data.jPos[1],state_data.jPos[2],state_data.jPos[3],state_data.jPos[4],state_data.jPos[5]);
+
+
+        JointPos state_data;
+        error_t returncode1 = _ptr_robot->GetActualJointPosDegree(1,&state_data);
+        double flag = 0.0;
+        for(auto j=0;j<6;j++){
+            flag += abs(cmd.jPos[j]-state_data.jPos[j]);
+        }
+
+        if (flag > 10){
+            // RCLCPP_INFO(rclcpp::get_logger("FairinoHardwareInterface2"), "ServoJ下发位置含有非法值:%f",flag);
+            return hardware_interface::return_type::OK;
+        }
+        // else{
+        //     RCLCPP_INFO(rclcpp::get_logger("FairinoHardwareInterface2"), "ServoJ下发位置含有正常值:%f",flag);
+        // }
+
         int returncode = _ptr_robot->ServoJ(&cmd,&extcmd,0,0,0.008,0,0);
         // jia ge sleep
         if(returncode != 0){
+            RCLCPP_INFO(rclcpp::get_logger("FairinoHardwareInterface2"), "ServoJ下发位置:%f,%f,%f,%f,%f,%f",\
+                cmd.jPos[0],cmd.jPos[1],cmd.jPos[2],cmd.jPos[3],cmd.jPos[4],cmd.jPos[5]);
             RCLCPP_INFO(rclcpp::get_logger("FairinoHardwareInterface2"), "ServoJ指令下发错误,错误码:%d",returncode);
         }
     }else if(_control_mode == 1){//扭矩控制模式
