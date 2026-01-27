@@ -9,9 +9,9 @@ header:
   frame_id: 'robot1_base_link'
 pose:
   position:
-    x: -0.578
-    y: -0.321
-    z: 0.172
+    x: -0.49497184636619895
+    y: -0.22964502690600153
+    z: 0.13614278734954066
   orientation:
     x: 0.5
     y: 0.5

@@ -44,7 +44,7 @@ class GripperController:
         
         # 监视相关变量
         self.monitoring = False
-        self.current_threshold = 0.2  # 电流阈值 (A)
+        self.current_threshold = 3.5  # 电流阈值 (A)
         self.monitor_thread = None
         self.last_position_command = None
         self.last_speed_command = None
