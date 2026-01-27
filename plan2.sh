@@ -4,6 +4,4 @@
 # ros2 service call /controller_manager/configure_controller controller_manager_msgs/srv/ConfigureController "{name: 'fairino16_controller'}"
 # ros2 service call /controller_manager/configure_controller controller_manager_msgs/srv/ConfigureController "{name: 'fairino5_controller'}"
 ros2 control set_controller_state fairino16_controller_servo inactive
-ros2 control set_controller_state fairino5_controller_servo inactive
 ros2 control set_controller_state fairino16_controller active
-ros2 control set_controller_state fairino5_controller active

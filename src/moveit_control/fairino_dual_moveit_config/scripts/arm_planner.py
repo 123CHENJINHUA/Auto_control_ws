@@ -51,14 +51,14 @@ class ArmPlanner(Node):
             PoseStamped,
             'goal_pose1',
             self.pose_callback1,
-            10
+            1
         )
 
         self.create_subscription(
             PoseStamped,
             'goal_pose2',
             self.pose_callback2,
-            10
+            1
         )
 
         self.init_moveit()
