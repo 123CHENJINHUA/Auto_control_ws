@@ -33,7 +33,7 @@ class Joy2Robot(Node):
         self.current_robot = 1
         self.last_button_y_state = 0
         self.motor_running = False
-        self.motor_speed = 200.0
+        self.motor_speed = 100.0
         self.gripper_val = 100.0
         self.last_button_x_state = 0
         self.last_button_tl_state = 0
@@ -45,6 +45,8 @@ class Joy2Robot(Node):
         self.last_time_tl = 0.0
         self.last_time_tr = 0.0
         self.last_time_lx = 0.0
+        self.last_time_ab = 0.0
+        self.z_angular_val = 0.0
         self.debounce_duration = 0.2
 
     def joy_callback(self, msg):
@@ -61,6 +63,9 @@ class Joy2Robot(Node):
         button_tl_state = 0
         button_tr_state = 0
         button_lx_state = 0
+        button_rx_state = 0
+        button_a_state = 0
+        button_b_state = 0
 
         for button in msg.buttons:
             if button.name == 'button_y':
@@ -73,6 +78,12 @@ class Joy2Robot(Node):
                 button_tr_state = button.data
             elif button.name == 'button_lx':
                 button_lx_state = button.data
+            elif button.name == 'button_rx':
+                button_rx_state = button.data
+            elif button.name == 'button_a':
+                button_a_state = button.data
+            elif button.name == 'button_b':
+                button_b_state = button.data
 
         # Robot Switch (Button Y)
         current_time = time.time()
@@ -109,11 +120,11 @@ class Joy2Robot(Node):
         # Motor Speed (Button TL/TR)
         speed_changed = False
         if button_tl_state == 1 and self.last_button_tl_state == 0 and (current_time - self.last_time_tl) > self.debounce_duration:
-            self.motor_speed += 50.0
+            self.motor_speed += 30.0
             speed_changed = True
             self.last_time_tl = current_time
         elif button_tr_state == 1 and self.last_button_tr_state == 0 and (current_time - self.last_time_tr) > self.debounce_duration:
-            self.motor_speed -= 50.0
+            self.motor_speed -= 30.0
             if self.motor_speed < 0.0:
                 self.motor_speed = 0.0
             speed_changed = True
@@ -137,6 +148,13 @@ class Joy2Robot(Node):
                 gripper_changed = True
             elif button_lx_state == -1:
                 self.gripper_val -= 3.0
+                gripper_changed = True
+            
+            if button_rx_state == 1:
+                self.gripper_val = 100.0
+                gripper_changed = True
+            elif button_rx_state == -1:
+                self.gripper_val = 65.0
                 gripper_changed = True
             
             if gripper_changed:
@@ -183,11 +201,23 @@ class Joy2Robot(Node):
         # linear.z <- top_stick_l
         # angular.z <- top_stick_r
         
-        twist_msg.twist.linear.x = left_stick_y
-        twist_msg.twist.linear.y = -left_stick_x
+        twist_msg.twist.linear.x = -left_stick_x
+        twist_msg.twist.linear.y = -left_stick_y
         twist_msg.twist.linear.z = top_stick_l - top_stick_r
-        twist_msg.twist.angular.x = right_stick_x
-        twist_msg.twist.angular.y = right_stick_y
+        twist_msg.twist.angular.x = right_stick_y
+        twist_msg.twist.angular.y = -right_stick_x
+        
+        # Debounce for Angler Z (Button A/B)
+        if (current_time - self.last_time_ab) > self.debounce_duration:
+            if button_a_state == 1:
+                self.z_angular_val = 1.0
+            elif button_b_state == 1:
+                self.z_angular_val = -1.0
+            else:
+                self.z_angular_val = 0.0
+            self.last_time_ab = current_time
+            
+        twist_msg.twist.angular.z = self.z_angular_val
   
 
         if self.current_robot == 1:
