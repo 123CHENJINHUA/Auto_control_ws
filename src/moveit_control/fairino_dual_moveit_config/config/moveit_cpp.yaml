@@ -19,17 +19,17 @@ ompl:
     default_planner_request_adapters/FixStartStateCollision
     default_planner_request_adapters/FixStartStatePathConstraints
   planner_configs:
-    PRMstarkConfigDefault:
-      type: geometric::PRMstarkConfigDefault
-      
-  # Define planner(s) for each move_group
-  # panda_arm:
-  #   planner_configs:
-  #     - PRMstarkConfigDefault
-  # Add additional planning pipeline config here
+    # PRMstarkConfigDefault:
+    #   type: geometric::PRMstarkConfigDefault
+    RRTstarkConfigDefault:
+      type: geometric::RRTstar
+      # optimization_objective: MaximizeMinClearanceObjective
+      range: 0.0
+      goal_bias: 0.05
+      delay_collision_checking: 1
 
 plan_request_params:
-  planning_attempts: 1
+  planning_attempts: 3
   planning_pipeline: ompl
   max_velocity_scaling_factor: 1.0
   max_acceleration_scaling_factor: 1.0

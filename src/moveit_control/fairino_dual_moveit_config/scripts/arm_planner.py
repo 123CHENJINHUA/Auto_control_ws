@@ -118,9 +118,13 @@ class ArmPlanner(Node):
     def pose_callback1(self, msg):
         """位姿规划回调 - 使用OMPL规划"""
         
+        self.get_logger().info("goal received for arm1")
         self.arm1.set_goal_state(pose_stamped_msg=msg, pose_link="tcp1")
         result = self.arm1.plan() # 使用OMPL规划
         self.execute_trajectory1(result.trajectory)
+        
+
+
 
     
     def execute_trajectory1(self, trajectory):

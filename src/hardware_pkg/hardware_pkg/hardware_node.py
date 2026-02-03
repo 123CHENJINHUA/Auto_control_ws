@@ -40,7 +40,7 @@ from geometry_msgs.msg import Vector3
 from sensor_msgs.msg import JointState
 
 from .motor_ctl import CL57RDriver
-from .gripper_ctl import GripperController
+# from .gripper_ctl import GripperController
 
 
 class HardwareNode(Node):
@@ -53,9 +53,9 @@ class HardwareNode(Node):
         self.declare_parameter('motor.slave_id', 1)
         self.declare_parameter('motor.timeout', 0.1)
 
-        self.declare_parameter('gripper.port', '/dev/ttyUSB1')
-        self.declare_parameter('gripper.baudrate', 115200)
-        self.declare_parameter('gripper.timeout', 1.0)
+        # self.declare_parameter('gripper.port', '/dev/ttyUSB1')
+        # self.declare_parameter('gripper.baudrate', 115200)
+        # self.declare_parameter('gripper.timeout', 1.0)
 
         self.declare_parameter('state_pub_period', 0.1)
 
@@ -64,9 +64,9 @@ class HardwareNode(Node):
         motor_slave_id = int(self.get_parameter('motor.slave_id').get_parameter_value().integer_value)
         motor_timeout = float(self.get_parameter('motor.timeout').get_parameter_value().double_value)
 
-        gripper_port = self.get_parameter('gripper.port').get_parameter_value().string_value
-        gripper_baudrate = int(self.get_parameter('gripper.baudrate').get_parameter_value().integer_value)
-        gripper_timeout = float(self.get_parameter('gripper.timeout').get_parameter_value().double_value)
+        # gripper_port = self.get_parameter('gripper.port').get_parameter_value().string_value
+        # gripper_baudrate = int(self.get_parameter('gripper.baudrate').get_parameter_value().integer_value)
+        # gripper_timeout = float(self.get_parameter('gripper.timeout').get_parameter_value().double_value)
 
         self.state_pub_period = float(self.get_parameter('state_pub_period').get_parameter_value().double_value)
 
@@ -74,7 +74,7 @@ class HardwareNode(Node):
         self._lock = threading.Lock()
 
         self.motor: Optional[CL57RDriver] = None
-        self.gripper: Optional[GripperController] = None
+        # self.gripper: Optional[GripperController] = None
 
         # Motor connect
         try:
@@ -88,26 +88,26 @@ class HardwareNode(Node):
         except Exception as e:
             self.get_logger().error(f"Motor connect failed: {e}")
 
-        # Gripper connect
-        try:
-            self.gripper = GripperController(
-                port=gripper_port,
-                baudrate=gripper_baudrate,
-                timeout=gripper_timeout,
-            )
-            if not self.gripper.connect():
-                self.get_logger().error("Gripper connect failed")
-                self.gripper = None
-            else:
-                self.get_logger().info(f"Gripper connected: port={gripper_port} baudrate={gripper_baudrate}")
-        except Exception as e:
-            self.get_logger().error(f"Gripper connect failed: {e}")
-            self.gripper = None
+        # # Gripper connect
+        # try:
+        #     self.gripper = GripperController(
+        #         port=gripper_port,
+        #         baudrate=gripper_baudrate,
+        #         timeout=gripper_timeout,
+        #     )
+        #     if not self.gripper.connect():
+        #         self.get_logger().error("Gripper connect failed")
+        #         self.gripper = None
+        #     else:
+        #         self.get_logger().info(f"Gripper connected: port={gripper_port} baudrate={gripper_baudrate}")
+        # except Exception as e:
+        #     self.get_logger().error(f"Gripper connect failed: {e}")
+        #     self.gripper = None
 
         # -------- Publishers --------
         self.pub_motor_state = self.create_publisher(JointState, 'motor/state', 10)
         self.pub_motor_status_text = self.create_publisher(String, 'motor/status_text', 10)
-        self.pub_gripper_state = self.create_publisher(JointState, 'gripper/state', 10)
+        # self.pub_gripper_state = self.create_publisher(JointState, 'gripper/state', 10)
 
         # -------- Subscribers (Motor) --------
         self.create_subscription(Bool, 'motor/enable', self._cb_motor_enable, 10)
@@ -116,9 +116,9 @@ class HardwareNode(Node):
         self.create_subscription(Empty, 'motor/stop', self._cb_motor_stop, 10)
         self.create_subscription(Int32, 'motor/home', self._cb_motor_home, 10)
 
-        # -------- Subscribers (Gripper) --------
-        self.create_subscription(Vector3, 'gripper/cmd_percent', self._cb_gripper_cmd_percent, 10)
-        self.create_subscription(Empty, 'gripper/stop_monitoring', self._cb_gripper_stop_monitoring, 10)
+        # # -------- Subscribers (Gripper) --------
+        # self.create_subscription(Vector3, 'gripper/cmd_percent', self._cb_gripper_cmd_percent, 10)
+        # self.create_subscription(Empty, 'gripper/stop_monitoring', self._cb_gripper_stop_monitoring, 10)
 
         # -------- Timers --------
         self._timer = self.create_timer(self.state_pub_period, self._publish_state)
@@ -195,34 +195,34 @@ class HardwareNode(Node):
             self.get_logger().error('motor home failed')
 
     # ---------------- Gripper callbacks ----------------
-    def _cb_gripper_cmd_percent(self, msg: Vector3) -> None:
-        """x=position_percent, y=speed_percent, z=wait_for_completion(1/0)"""
-        if not self.gripper:
-            self.get_logger().error('gripper not initialized')
-            return
+    # def _cb_gripper_cmd_percent(self, msg: Vector3) -> None:
+    #     """x=position_percent, y=speed_percent, z=wait_for_completion(1/0)"""
+    #     if not self.gripper:
+    #         self.get_logger().error('gripper not initialized')
+    #         return
 
-        position_percent = float(msg.x)
-        speed_percent = float(msg.y)
-        wait_for_completion = bool(int(msg.z) != 0)
+    #     position_percent = float(msg.x)
+    #     speed_percent = float(msg.y)
+    #     wait_for_completion = bool(int(msg.z) != 0)
 
-        def _run_gripper():
-            with self._lock:
-                ok = self.gripper.send_command_with_monitoring_percent(
-                    position_percent=position_percent,
-                    speed_percent=speed_percent,
-                    wait_for_completion=wait_for_completion,
-                )
-            if not ok:
-                self.get_logger().error('gripper command failed')
+    #     def _run_gripper():
+    #         with self._lock:
+    #             ok = self.gripper.send_command_with_monitoring_percent(
+    #                 position_percent=position_percent,
+    #                 speed_percent=speed_percent,
+    #                 wait_for_completion=wait_for_completion,
+    #             )
+    #         if not ok:
+    #             self.get_logger().error('gripper command failed')
 
-        threading.Thread(target=_run_gripper, daemon=True).start()
+    #     threading.Thread(target=_run_gripper, daemon=True).start()
 
-    def _cb_gripper_stop_monitoring(self, _: Empty) -> None:
-        if not self.gripper:
-            self.get_logger().error('gripper not initialized')
-            return
-        with self._lock:
-            self.gripper.stop_monitoring()
+    # def _cb_gripper_stop_monitoring(self, _: Empty) -> None:
+    #     if not self.gripper:
+    #         self.get_logger().error('gripper not initialized')
+    #         return
+    #     with self._lock:
+    #         self.gripper.stop_monitoring()
 
     # ---------------- State publisher ----------------
     def _publish_state(self) -> None:
@@ -247,19 +247,19 @@ class HardwareNode(Node):
             txt.data = str(st)
             self.pub_motor_status_text.publish(txt)
 
-        # Gripper
-        if self.gripper:
-            with self._lock:
-                gpos = self.gripper.read_position()
-                gcur = self.gripper.read_current()
+        # # Gripper
+        # if self.gripper:
+        #     with self._lock:
+        #         gpos = self.gripper.read_position()
+        #         gcur = self.gripper.read_current()
 
-            js = JointState()
-            js.header.stamp = now
-            js.name = ['gripper']
-            js.position = [float(gpos) if gpos is not None else float('nan')]
-            js.velocity = []
-            js.effort = [float(gcur) if gcur is not None else float('nan')]
-            self.pub_gripper_state.publish(js)
+        #     js = JointState()
+        #     js.header.stamp = now
+        #     js.name = ['gripper']
+        #     js.position = [float(gpos) if gpos is not None else float('nan')]
+        #     js.velocity = []
+        #     js.effort = [float(gcur) if gcur is not None else float('nan')]
+        #     self.pub_gripper_state.publish(js)
 
     def destroy_node(self) -> bool:
         # clean-up serial connections

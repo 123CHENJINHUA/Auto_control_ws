@@ -268,6 +268,12 @@ def launch_setup(context, *args, **kwargs):
         output='screen',
     )
 
+    auto = Node(
+        package='fairino_dual_moveit_config',
+        executable='automatic_node.py',
+        output='screen',
+    )
+
     nodes_to_start = [
         config_pkg,
         planner_name,
@@ -287,7 +293,8 @@ def launch_setup(context, *args, **kwargs):
         configure_after_load5,
         configure_after_load16,
         VR,
-        Transform
+        Transform,
+        auto
     ]
 
 ########################################################################################################

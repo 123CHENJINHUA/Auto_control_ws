@@ -137,7 +137,7 @@
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <box size="0.4 0.2 0.8"/>  <!-- 长宽高各0.1米 -->
+        <box size="0.5 0.2 0.8"/>  <!-- 长宽高各0.1米 -->
       </geometry>
       <material name="gray">
         <color rgba="0.7 0.7 0.7 1.0"/>
@@ -147,7 +147,7 @@
     <collision>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <geometry>
-        <box size="0.4 0.2 0.8"/>
+        <box size="0.5 0.2 0.8"/>
       </geometry>
     </collision>
     <!-- 惯性属性 -->
@@ -225,7 +225,7 @@
   <joint name="cube1_fixed" type="fixed">
     <parent link="base_dual_arm"/> <!-- 假设已有名为"world"的基准连杆 -->
     <child link="cube_link1"/>
-    <origin xyz="0.20 0.85 0.95" rpy="0 0 0"/> <!-- 墙的位置（相对于父连杆） -->
+    <origin xyz="0.25 0.85 0.95" rpy="0 0 0"/> <!-- 墙的位置（相对于父连杆） -->
   </joint>
 
 
@@ -1132,7 +1132,7 @@
     <axis
       xyz="0 0 1" />
     <limit
-      lower="-3.0543"
+      lower="-2.5543"
       upper="3.0543"
       effort="28"
       velocity="3.2" />
@@ -1143,7 +1143,7 @@
       damping="0"
       friction="0" />
     <safety_controller
-      soft_lower_limit="-3.0543"
+      soft_lower_limit="-2.5543"
       soft_upper_limit="3.0543"
       k_position="15"
       k_velocity="10" />

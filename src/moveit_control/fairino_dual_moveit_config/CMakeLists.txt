@@ -33,6 +33,7 @@ install(PROGRAMS
   scripts/arm_planner.py
   scripts/vr_node.py
   scripts/transform_robot.py
+  scripts/automatic_node.py
   DESTINATION lib/${PROJECT_NAME}
 )
 
