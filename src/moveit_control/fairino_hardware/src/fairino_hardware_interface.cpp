@@ -203,7 +203,7 @@ hardware_interface::return_type FairinoHardwareInterface::write(const rclcpp::Ti
             flag += abs(cmd.jPos[j]-state_data.jPos[j]);
         }
 
-        if (flag > 10){
+        if (flag > 5){
             // RCLCPP_INFO(rclcpp::get_logger("FairinoHardwareInterface"), "ServoJ下发位置含有非法值:%f",flag);
             return hardware_interface::return_type::OK;
         }

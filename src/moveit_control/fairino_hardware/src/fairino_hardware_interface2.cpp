@@ -203,7 +203,7 @@ hardware_interface::return_type FairinoHardwareInterface2::write(const rclcpp::T
             flag += abs(cmd.jPos[j]-state_data.jPos[j]);
         }
 
-        if (flag > 10){
+        if (flag > 5){
             // RCLCPP_INFO(rclcpp::get_logger("FairinoHardwareInterface2"), "ServoJ下发位置含有非法值:%f",flag);
             return hardware_interface::return_type::OK;
         }
@@ -216,6 +216,8 @@ hardware_interface::return_type FairinoHardwareInterface2::write(const rclcpp::T
         if(returncode != 0){
             RCLCPP_INFO(rclcpp::get_logger("FairinoHardwareInterface2"), "ServoJ下发位置:%f,%f,%f,%f,%f,%f",\
                 cmd.jPos[0],cmd.jPos[1],cmd.jPos[2],cmd.jPos[3],cmd.jPos[4],cmd.jPos[5]);
+                RCLCPP_INFO(rclcpp::get_logger("FairinoHardwareInterface2"), "实际位置:%f,%f,%f,%f,%f,%f",\
+                state_data.jPos[0],state_data.jPos[1],state_data.jPos[2],state_data.jPos[3],state_data.jPos[4],state_data.jPos[5]);
             RCLCPP_INFO(rclcpp::get_logger("FairinoHardwareInterface2"), "ServoJ指令下发错误,错误码:%d",returncode);
         }
     }else if(_control_mode == 1){//扭矩控制模式
