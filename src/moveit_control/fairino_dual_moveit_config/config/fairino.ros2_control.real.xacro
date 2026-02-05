@@ -15,9 +15,12 @@
                 <state_interface name="position">
                   <param name="initial_value">${initial_positions['robot2_j1']}</param>
                 </state_interface>
-                <!-- <state_interface name="velocity">
+                <state_interface name="velocity">
                   <param name="initial_value">0</param>
-                </state_interface> -->
+                </state_interface>
+                <state_interface name="effort">
+                  <param name="initial_value">0</param>
+                </state_interface>
             </joint>
             <joint name="robot2_j2">
                 <command_interface name="position"/>
@@ -25,9 +28,12 @@
                 <state_interface name="position">
                   <param name="initial_value">${initial_positions['robot2_j2']}</param>
                 </state_interface>
-                <!-- <state_interface name="velocity">
+                <state_interface name="velocity">
                   <param name="initial_value">0</param>
-                </state_interface> -->
+                </state_interface>
+                <state_interface name="effort">
+                  <param name="initial_value">0</param>
+                </state_interface>
             </joint>
             <joint name="robot2_j3">
                 <command_interface name="position"/>
@@ -35,9 +41,12 @@
                 <state_interface name="position">
                   <param name="initial_value">${initial_positions['robot2_j3']}</param>
                 </state_interface>
-                <!-- <state_interface name="velocity">
+                <state_interface name="velocity">
                   <param name="initial_value">0</param>
-                </state_interface> -->
+                </state_interface>
+                <state_interface name="effort">
+                  <param name="initial_value">0</param>
+                </state_interface>
             </joint>
             <joint name="robot2_j4">
                 <command_interface name="position"/>
@@ -45,9 +54,12 @@
                 <state_interface name="position">
                   <param name="initial_value">${initial_positions['robot2_j4']}</param>
                 </state_interface>
-                <!-- <state_interface name="velocity">
+                <state_interface name="velocity">
                   <param name="initial_value">0</param>
-                </state_interface> -->
+                </state_interface>
+                <state_interface name="effort">
+                  <param name="initial_value">0</param>
+                </state_interface>
             </joint>
             <joint name="robot2_j5">
                 <command_interface name="position"/>
@@ -55,9 +67,12 @@
                 <state_interface name="position">
                   <param name="initial_value">${initial_positions['robot2_j5']}</param>
                 </state_interface>
-                <!-- <state_interface name="velocity">
+                <state_interface name="velocity">
                   <param name="initial_value">0</param>
-                </state_interface> -->
+                </state_interface>
+                <state_interface name="effort">
+                  <param name="initial_value">0</param>
+                </state_interface>
             </joint>
             <joint name="robot2_j6">
                 <command_interface name="position"/>
@@ -65,9 +80,12 @@
                 <state_interface name="position">
                   <param name="initial_value">${initial_positions['robot2_j6']}</param>
                 </state_interface>
-                <!-- <state_interface name="velocity">
+                <state_interface name="velocity">
                   <param name="initial_value">0</param>
-                </state_interface> -->
+                </state_interface>
+                <state_interface name="effort">
+                  <param name="initial_value">0</param>
+                </state_interface>
             </joint>
 
         </ros2_control>
@@ -83,9 +101,12 @@
                 <state_interface name="position">
                   <param name="initial_value">${initial_positions['robot1_j1']}</param>
                 </state_interface>
-                <!-- <state_interface name="velocity">
+                <state_interface name="velocity">
                   <param name="initial_value">0</param>
-                </state_interface> -->
+                </state_interface>
+                <state_interface name="effort">
+                  <param name="initial_value">0</param>
+                </state_interface>
             </joint>
             <joint name="robot1_j2">
                 <command_interface name="position"/>
@@ -93,9 +114,12 @@
                 <state_interface name="position">
                   <param name="initial_value">${initial_positions['robot1_j2']}</param>
                 </state_interface>
-                <!-- <state_interface name="velocity">
+                <state_interface name="velocity">
                   <param name="initial_value">0</param>
-                </state_interface> -->
+                </state_interface>
+                <state_interface name="effort">
+                  <param name="initial_value">0</param>
+                </state_interface>
             </joint>
             <joint name="robot1_j3">
                 <command_interface name="position"/>
@@ -103,9 +127,12 @@
                 <state_interface name="position">
                   <param name="initial_value">${initial_positions['robot1_j3']}</param>
                 </state_interface>
-                <!-- <state_interface name="velocity">
+                <state_interface name="velocity">
                   <param name="initial_value">0</param>
-                </state_interface> -->
+                </state_interface>
+                <state_interface name="effort">
+                  <param name="initial_value">0</param>
+                </state_interface>
             </joint>
             <joint name="robot1_j4">
                 <command_interface name="position"/>
@@ -113,9 +140,12 @@
                 <state_interface name="position">
                   <param name="initial_value">${initial_positions['robot1_j4']}</param>
                 </state_interface>
-                <!-- <state_interface name="velocity">
+                <state_interface name="velocity">
                   <param name="initial_value">0</param>
-                </state_interface> -->
+                </state_interface>
+                <state_interface name="effort">
+                  <param name="initial_value">0</param>
+                </state_interface>
             </joint>
             <joint name="robot1_j5">
                 <command_interface name="position"/>
@@ -123,9 +153,12 @@
                 <state_interface name="position">
                   <param name="initial_value">${initial_positions['robot1_j5']}</param>
                 </state_interface>
-                <!-- <state_interface name="velocity">
+                <state_interface name="velocity">
                   <param name="initial_value">0</param>
-                </state_interface> -->
+                </state_interface>
+                <state_interface name="effort">
+                  <param name="initial_value">0</param>
+                </state_interface>
             </joint>
             <joint name="robot1_j6">
                 <command_interface name="position"/>
@@ -133,9 +166,12 @@
                 <state_interface name="position">
                   <param name="initial_value">${initial_positions['robot1_j6']}</param>
                 </state_interface>
-                <!-- <state_interface name="velocity">
+                <state_interface name="velocity">
                   <param name="initial_value">0</param>
-                </state_interface> -->
+                </state_interface>
+                <state_interface name="effort">
+                  <param name="initial_value">0</param>
+                </state_interface>
             </joint>
         </ros2_control>
 

@@ -33,6 +33,8 @@ fairino16_controller:
       - position
     state_interfaces:
       - position
+      - velocity
+      - effort
 
 fairino5_controller:
   ros__parameters:
@@ -47,6 +49,8 @@ fairino5_controller:
       - position
     state_interfaces:
       - position
+      - velocity
+      - effort
 
 fairino16_controller_servo:
   ros__parameters:

@@ -46,19 +46,19 @@ hardware_interface::CallbackReturn FairinoHardwareInterface2::on_init(const hard
             return hardware_interface::CallbackReturn::ERROR;
         }
 
-        // if (joint.state_interfaces[1].name != hardware_interface::HW_IF_VELOCITY) {
-        //     RCLCPP_FATAL(rclcpp::get_logger("FairinoHardwareInterface2"),
-        //                 "Joint '%s' have %s state interface as second state interface. '%s' expected.", joint.name.c_str(),
-        //                 joint.state_interfaces[1].name.c_str(), hardware_interface::HW_IF_VELOCITY);
-        //     return hardware_interface::CallbackReturn::ERROR;
-        // }
+        if (joint.state_interfaces[1].name != hardware_interface::HW_IF_VELOCITY) {
+            RCLCPP_FATAL(rclcpp::get_logger("FairinoHardwareInterface2"),
+                        "Joint '%s' have %s state interface as second state interface. '%s' expected.", joint.name.c_str(),
+                        joint.state_interfaces[1].name.c_str(), hardware_interface::HW_IF_VELOCITY);
+            return hardware_interface::CallbackReturn::ERROR;
+        }
 
-        // if (joint.state_interfaces[2].name != hardware_interface::HW_IF_EFFORT) {
-        //     RCLCPP_FATAL(rclcpp::get_logger("FairinoHardwareInterface2"),
-        //                 "Joint '%s' have %s state interface as third state interface. '%s' expected.", joint.name.c_str(),
-        //                 joint.state_interfaces[2].name.c_str(), hardware_interface::HW_IF_EFFORT);
-        //     return hardware_interface::CallbackReturn::ERROR;
-        // }
+        if (joint.state_interfaces[2].name != hardware_interface::HW_IF_EFFORT) {
+            RCLCPP_FATAL(rclcpp::get_logger("FairinoHardwareInterface2"),
+                        "Joint '%s' have %s state interface as third state interface. '%s' expected.", joint.name.c_str(),
+                        joint.state_interfaces[2].name.c_str(), hardware_interface::HW_IF_EFFORT);
+            return hardware_interface::CallbackReturn::ERROR;
+        }
 
     }
     return hardware_interface::CallbackReturn::SUCCESS;
@@ -75,11 +75,11 @@ std::vector<hardware_interface::StateInterface> FairinoHardwareInterface2::expor
     state_interfaces.emplace_back(hardware_interface::StateInterface(
         info_.joints[i].name, hardware_interface::HW_IF_POSITION, &_jnt_position_state[i]));
 
-    // state_interfaces.emplace_back(hardware_interface::StateInterface(
-    //     info_.joints[i].name, hardware_interface::HW_IF_VELOCITY, &_jnt_velocity_state.at(i)));
+    state_interfaces.emplace_back(hardware_interface::StateInterface(
+        info_.joints[i].name, hardware_interface::HW_IF_VELOCITY, &_jnt_velocity_state[i]));
 
-    // state_interfaces.emplace_back(hardware_interface::StateInterface(
-    //     info_.joints[i].name, hardware_interface::HW_IF_EFFORT, &_jnt_torque_state.at(i)));
+    state_interfaces.emplace_back(hardware_interface::StateInterface(
+        info_.joints[i].name, hardware_interface::HW_IF_EFFORT, &_jnt_torque_state[i]));
   }
 
   //导出
@@ -203,7 +203,7 @@ hardware_interface::return_type FairinoHardwareInterface2::write(const rclcpp::T
             flag += abs(cmd.jPos[j]-state_data.jPos[j]);
         }
 
-        if (flag > 5){
+        if (flag > 8){
             // RCLCPP_INFO(rclcpp::get_logger("FairinoHardwareInterface2"), "ServoJ下发位置含有非法值:%f",flag);
             return hardware_interface::return_type::OK;
         }
