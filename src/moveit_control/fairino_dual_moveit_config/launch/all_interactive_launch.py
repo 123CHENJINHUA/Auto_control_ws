@@ -56,7 +56,7 @@ def launch_setup(context, *args, **kwargs):
     moveit_controller_path = os.path.join(
         get_package_share_directory('fairino_dual_moveit_config'),
         'config',
-        'moveit_controllers_all.yaml'
+        'moveit_controllers.yaml'
     )
 
     moveit_config = (
@@ -73,9 +73,9 @@ def launch_setup(context, *args, **kwargs):
     )
 
 
-    rviz_base = LaunchConfiguration("rviz_config")
+    # rviz_base = LaunchConfiguration("rviz_config")
     rviz_config = PathJoinSubstitution(
-        [FindPackageShare("moveit2_tutorials"), "launch", rviz_base]
+        [FindPackageShare("fairino_dual_moveit_config"), "config", 'moveit.rviz']
     )
 
     # RViz
@@ -91,7 +91,7 @@ def launch_setup(context, *args, **kwargs):
             moveit_config.robot_description_kinematics,
             moveit_config.planning_pipelines,
             moveit_config.joint_limits,
-            {'use_sim_time': True}
+            {'use_sim_time': False}
         ],
     )
 
@@ -101,7 +101,7 @@ def launch_setup(context, *args, **kwargs):
         package="moveit_ros_move_group",
         executable="move_group",
         output="screen",
-        parameters=[moveit_config.to_dict(),{'use_sim_time': True}],
+        parameters=[moveit_config.to_dict(),{'use_sim_time': False}],
     )
 
     robot_state_publisher = Node(
@@ -109,13 +109,13 @@ def launch_setup(context, *args, **kwargs):
         executable="robot_state_publisher",
         name="robot_state_publisher",
         output="both",
-        parameters=[moveit_config.robot_description,{'use_sim_time': True}],
+        parameters=[moveit_config.robot_description,{'use_sim_time': False}],
     )
 
     ros2_control_node = Node(
         package="controller_manager",
         executable="ros2_control_node",
-        parameters=[moveit_config.robot_description, default_controller_path,{'use_sim_time': True}],
+        parameters=[moveit_config.robot_description, default_controller_path,{'use_sim_time': False}],
         output="both",
     )
 
@@ -153,122 +153,122 @@ def launch_setup(context, *args, **kwargs):
 
 ########################################################################################################
 
-    package_name = 'fairino_dual_moveit_config'  # 替换为你的包名
-    urdf_file_name = 'fairino_dual_robot_gazebo.xacro'  # 替换为你的URDF文件名
+#     package_name = 'fairino_dual_moveit_config'  # 替换为你的包名
+#     urdf_file_name = 'fairino_dual_robot_gazebo.xacro'  # 替换为你的URDF文件名
 
-    goal_list = []
-
-
-    default_urdf_file_path = os.path.join(
-        get_package_share_directory(package_name),
-        'config',
-        urdf_file_name
-    )
-
-    action_declare_arg_model_path = launch.actions.DeclareLaunchArgument(
-        name='model', default_value=str(default_urdf_file_path),description='URDF file'
-    )
-
-    substitutions_command_result = launch.substitutions.Command(['xacro ', launch.substitutions.LaunchConfiguration('model')])
-    robot_description_value = launch_ros.parameter_descriptions.ParameterValue(substitutions_command_result)
-
-    # 启动机器人状态发布节点
-    action_robot_state_publisher = launch_ros.actions.Node(
-        package='robot_state_publisher',
-        executable='robot_state_publisher',
-        name='robot_state_publisher',
-        output='screen',
-        namespace='gazebo',
-        parameters=[{'robot_description': robot_description_value},{'use_sim_time': True},{"publish_frequency":50.0}],
-    )
+#     goal_list = []
 
 
-    # 启动机器人模型加载到Gazebo
-    # this will activate the controller_manager and set the parameters for the manager
-    # but will not load the controllers specified in the yaml
-    action_spawn_entity = launch_ros.actions.Node(
-        package='gazebo_ros',
-        executable='spawn_entity.py',
-        name='spawn_entity',
-        namespace='gazebo',
-        arguments=['-topic', 'robot_description', '-entity', 'dual_robot'],
-        output='screen'
-    )
+#     default_urdf_file_path = os.path.join(
+#         get_package_share_directory(package_name),
+#         'config',
+#         urdf_file_name
+#     )
+
+#     action_declare_arg_model_path = launch.actions.DeclareLaunchArgument(
+#         name='model', default_value=str(default_urdf_file_path),description='URDF file'
+#     )
+
+#     substitutions_command_result = launch.substitutions.Command(['xacro ', launch.substitutions.LaunchConfiguration('model')])
+#     robot_description_value = launch_ros.parameter_descriptions.ParameterValue(substitutions_command_result)
+
+#     # 启动机器人状态发布节点
+#     action_robot_state_publisher = launch_ros.actions.Node(
+#         package='robot_state_publisher',
+#         executable='robot_state_publisher',
+#         name='robot_state_publisher',
+#         output='screen',
+#         namespace='gazebo',
+#         parameters=[{'robot_description': robot_description_value},{'use_sim_time': True},{"publish_frequency":50.0}],
+#     )
+
+
+#     # 启动机器人模型加载到Gazebo
+#     # this will activate the controller_manager and set the parameters for the manager
+#     # but will not load the controllers specified in the yaml
+#     action_spawn_entity = launch_ros.actions.Node(
+#         package='gazebo_ros',
+#         executable='spawn_entity.py',
+#         name='spawn_entity',
+#         namespace='gazebo',
+#         arguments=['-topic', 'robot_description', '-entity', 'dual_robot'],
+#         output='screen'
+#     )
     
-    # load the real controller
-    action_load_controller1 = launch_ros.actions.Node(
-        package='controller_manager',
-        executable='spawner',
-        namespace='gazebo',
-        arguments=['fairino5_controller', '--controller-manager', 'controller_manager'],
-        output='screen',
-    )
+#     # load the real controller
+#     action_load_controller1 = launch_ros.actions.Node(
+#         package='controller_manager',
+#         executable='spawner',
+#         namespace='gazebo',
+#         arguments=['fairino5_controller', '--controller-manager', 'controller_manager'],
+#         output='screen',
+#     )
 
-    action_load_controller2 = launch_ros.actions.Node(
-        package='controller_manager',
-        executable='spawner',
-        namespace='gazebo',
-        arguments=['fairino16_controller', '--controller-manager', 'controller_manager'],
-        output='screen',
-    )
+#     action_load_controller2 = launch_ros.actions.Node(
+#         package='controller_manager',
+#         executable='spawner',
+#         namespace='gazebo',
+#         arguments=['fairino16_controller', '--controller-manager', 'controller_manager'],
+#         output='screen',
+#     )
 
-    action_load_broadcaster = launch_ros.actions.Node(
-        package='controller_manager',
-        executable='spawner',
-        namespace='gazebo',
-        arguments=['joint_state_broadcaster', '--controller-manager', 'controller_manager'],
-        output='screen',
-    )
+#     action_load_broadcaster = launch_ros.actions.Node(
+#         package='controller_manager',
+#         executable='spawner',
+#         namespace='gazebo',
+#         arguments=['joint_state_broadcaster', '--controller-manager', 'controller_manager'],
+#         output='screen',
+#     )
 
-    goal_list.append(action_declare_arg_model_path)
-    goal_list.append(action_robot_state_publisher)
-    goal_list.append(action_spawn_entity)
-    goal_list.append(action_load_controller1)
-    goal_list.append(action_load_controller2)
-    goal_list.append(action_load_broadcaster)
+#     goal_list.append(action_declare_arg_model_path)
+#     goal_list.append(action_robot_state_publisher)
+#     goal_list.append(action_spawn_entity)
+#     goal_list.append(action_load_controller1)
+#     goal_list.append(action_load_controller2)
+#     goal_list.append(action_load_broadcaster)
 
-    default_gazebo_file_path = os.path.join(
-        get_package_share_directory(package_name),
-        'worlds',
-        'my_env.world'
-    )
+#     default_gazebo_file_path = os.path.join(
+#         get_package_share_directory(package_name),
+#         'worlds',
+#         'my_env.world'
+#     )
 
-     # 启动Gazebo节点
-    gazebo_launch_file = os.path.join(
-        get_package_share_directory('gazebo_ros'),
-        'launch',
-        'gazebo.launch.py'
-    )
+#      # 启动Gazebo节点
+#     gazebo_launch_file = os.path.join(
+#         get_package_share_directory('gazebo_ros'),
+#         'launch',
+#         'gazebo.launch.py'
+#     )
 
-    action_gazebo = launch.actions.IncludeLaunchDescription(
-        launch.launch_description_sources.PythonLaunchDescriptionSource(gazebo_launch_file),
-        launch_arguments=[('world', default_gazebo_file_path),('verbose', 'true')]
-    )
+#     action_gazebo = launch.actions.IncludeLaunchDescription(
+#         launch.launch_description_sources.PythonLaunchDescriptionSource(gazebo_launch_file),
+#         launch_arguments=[('world', default_gazebo_file_path),('verbose', 'true')]
+#     )
 
-    goal_list.append(action_gazebo)
-
-
-#######################################################################################################
-
-    # 转发结点，将moveit的结果转发至两个systems
-    broadcaster_robot2_node = Node(
-        package='fairino_dual_moveit_config',
-        executable='broadcaster_robot2.py', 
-        name='broadcaster_robot2',
-        output='screen',
-        parameters=[{'use_sim_time': True}]
-    )
-
-    broadcaster_robot1_node = Node(
-        package='fairino_dual_moveit_config',
-        executable='broadcaster_robot1.py',
-        name='broadcaster_robot1',
-        output='screen',
-        parameters=[{'use_sim_time': True}]
-    )
+#     goal_list.append(action_gazebo)
 
 
+# #######################################################################################################
 
-    return nodes_to_start + goal_list + [broadcaster_robot2_node,broadcaster_robot1_node]
-    # return nodes_to_start
+#     # 转发结点，将moveit的结果转发至两个systems
+#     broadcaster_robot2_node = Node(
+#         package='fairino_dual_moveit_config',
+#         executable='broadcaster_robot2.py', 
+#         name='broadcaster_robot2',
+#         output='screen',
+#         parameters=[{'use_sim_time': True}]
+#     )
+
+#     broadcaster_robot1_node = Node(
+#         package='fairino_dual_moveit_config',
+#         executable='broadcaster_robot1.py',
+#         name='broadcaster_robot1',
+#         output='screen',
+#         parameters=[{'use_sim_time': True}]
+#     )
+
+
+
+    # return nodes_to_start + goal_list + [broadcaster_robot2_node,broadcaster_robot1_node]
+    return nodes_to_start
 

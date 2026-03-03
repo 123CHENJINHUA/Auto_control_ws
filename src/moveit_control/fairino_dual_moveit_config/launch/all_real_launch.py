@@ -258,7 +258,7 @@ def launch_setup(context, *args, **kwargs):
 
     VR = Node(
         package='fairino_dual_moveit_config',
-        executable='vr_node.py',
+        executable='vr_lerobot_node.py',
         output='screen',
     )
 

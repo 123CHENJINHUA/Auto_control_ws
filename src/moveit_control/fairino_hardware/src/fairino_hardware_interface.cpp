@@ -33,11 +33,11 @@ hardware_interface::CallbackReturn FairinoHardwareInterface::on_init(const hardw
         // }
 
         //关节状态部分
-        if (joint.state_interfaces.size() != 1) {
-            RCLCPP_FATAL(rclcpp::get_logger("FairinoHardwareInterface"), "Joint '%s' has %zu state interface. 3 expected.",
-                        joint.name.c_str(), joint.state_interfaces.size());
-            return hardware_interface::CallbackReturn::ERROR;
-        }
+        // if (joint.state_interfaces.size() != 1) {
+        //     RCLCPP_FATAL(rclcpp::get_logger("FairinoHardwareInterface"), "Joint '%s' has %zu state interface. 3 expected.",
+        //                 joint.name.c_str(), joint.state_interfaces.size());
+        //     return hardware_interface::CallbackReturn::ERROR;
+        // }
 
         if (joint.state_interfaces[0].name != hardware_interface::HW_IF_POSITION) {
             RCLCPP_FATAL(rclcpp::get_logger("FairinoHardwareInterface"),
@@ -164,16 +164,19 @@ hardware_interface::return_type FairinoHardwareInterface::read(const rclcpp::Tim
 {//从RTDE反馈数据中获取所需的位置，速度和扭矩信息
     JointPos state_data;
     error_t returncode = _ptr_robot->GetActualJointPosDegree(1,&state_data);
+    float joint_speed[6];
+    error_t returncode3 = _ptr_robot->GetActualJointSpeedsDegree(1,joint_speed);
     if(returncode == 0){
         for(int i=0;i<6;i++){
             _jnt_position_state[i] = state_data.jPos[i]/180.0*M_PI;//注意单位转换，moveit统一用弧度
+            _jnt_velocity_state[i] = joint_speed[i]/180.0*M_PI;
             //_jnt_torque_state[i] = state_data.jt_cur_tor[i];//注意单位转换
         }
     }else{
         hardware_interface::return_type::ERROR;
     }
     // RCLCPP_INFO(rclcpp::get_logger("FairinoHardwareInterface"), "System successfully read: %f,%f,%f,%f,%f,%f",_jnt_position_state[0],\
-    _jnt_position_state[1],_jnt_position_state[2],_jnt_position_state[3],_jnt_position_state[4],_jnt_position_state[5]);
+    // _jnt_position_state[1],_jnt_position_state[2],_jnt_position_state[3],_jnt_position_state[4],_jnt_position_state[5]);
 
   return hardware_interface::return_type::OK;
 

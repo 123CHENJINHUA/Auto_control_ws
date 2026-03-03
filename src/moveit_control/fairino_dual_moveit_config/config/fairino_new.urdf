@@ -1,0 +1,1184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.5.1-0-g916b5db  Build Version: 1.5.7152.31018
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="dual_robot">
+
+  <link name="world"/>
+
+  <link name="cam"/>
+
+  <link name="base_dual_arm">
+    <inertial>
+      <mass value="10.0"/>
+      <inertia ixx="0.1" ixy="0" ixz="0" iyy="0.1" iyz="0" izz="0.1"/>
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find fairino_description)/meshes/base.STL" 
+          scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.89804 0.91765 0.92941 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find fairino_description)/meshes/base.STL" 
+          scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="end2">
+    <inertial>
+      <mass value="10.0"/>
+      <inertia ixx="0.1" ixy="0" ixz="0" iyy="0.1" iyz="0" izz="0.1"/>
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find fairino_description)/meshes/end2.STL" 
+          scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.89804 0.91765 0.92941 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find fairino_description)/meshes/end2.STL" 
+          scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="end1">
+    <inertial>
+      <mass value="10.0"/>
+      <inertia ixx="0.1" ixy="0" ixz="0" iyy="0.1" iyz="0" izz="0.1"/>
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find fairino_description)/meshes/end1.STL" 
+          scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.89804 0.91765 0.92941 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find fairino_description)/meshes/end1.STL" 
+          scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="tcp1"/>
+  <link name="tcp2"/>
+
+
+  <link name="wall">
+    <visual>
+      <origin xyz="0 0 1" rpy="0 0 0"/>
+      <geometry>
+        <box size="2.0 0.1 2.0"/> <!-- 长(x) 厚(y) 高(z) -->
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 1" rpy="0 0 0"/>
+      <geometry>
+        <box size="2.0 0.1 2.0"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="100"/> <!-- 墙的质量 -->
+      <inertia ixx="1" ixy="0" ixz="0" iyy="1" iyz="0" izz="1"/>
+    </inertial>
+  </link>
+
+  <!-- 定义方块连杆 -->
+  <link name="cube_link2">
+    <!-- 视觉属性 -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.19 0.6 0.8"/>  <!-- 长宽高各0.1米 -->
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <!-- 碰撞属性 -->
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.19 0.6 0.8"/>
+      </geometry>
+    </collision>
+    <!-- 惯性属性 -->
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1.0"/>  <!-- 质量1kg -->
+      <inertia
+        ixx="0.001666" ixy="0.0" ixz="0.0"
+        iyy="0.001666" iyz="0.0"
+        izz="0.001666"/>
+    </inertial>
+  </link>
+
+  <!-- 定义方块连杆 -->
+  <link name="cube_link3">
+    <!-- 视觉属性 -->
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.19 0.6 0.8"/>  <!-- 长宽高各0.1米 -->
+      </geometry>
+      <material name="gray">
+        <color rgba="0.7 0.7 0.7 1.0"/>
+      </material>
+    </visual>
+    <!-- 碰撞属性 -->
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <box size="0.19 0.6 0.8"/>
+      </geometry>
+    </collision>
+    <!-- 惯性属性 -->
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="1.0"/>  <!-- 质量1kg -->
+      <inertia
+        ixx="0.001666" ixy="0.0" ixz="0.0"
+        iyy="0.001666" iyz="0.0"
+        izz="0.001666"/>
+    </inertial>
+  </link>
+
+  <joint name="cube2_fixed" type="fixed">
+    <parent link="wall"/> <!-- 假设已有名为"world"的基准连杆 -->
+    <child link="cube_link2"/>
+    <origin xyz="-1.1 0 0.95" rpy="0 0 0"/> <!-- 墙的位置（相对于父连杆） -->
+  </joint>
+
+
+  <joint name="cube3_fixed" type="fixed">
+    <parent link="wall"/> <!-- 假设已有名为"world"的基准连杆 -->
+    <child link="cube_link3"/>
+    <origin xyz="1.1 0 0.95" rpy="0 0 0"/> <!-- 墙的位置（相对于父连杆） -->
+  </joint>
+
+
+  <joint name="wall_fixed" type="fixed">
+    <parent link="world"/> <!-- 假设已有名为"world"的基准连杆 -->
+    <child link="wall"/>
+    <origin xyz="0 0.55 0.2" rpy="-0.261 0 0"/> <!-- 墙的位置（相对于父连杆） -->
+  </joint>
+
+  <joint name="fixed" type="fixed">
+      <parent link="world"/>
+      <child link="cam"/>
+      <origin xyz="0.0 0.0 1.2" rpy="-1.57 0 0"/>
+  </joint>
+
+  <joint name="fixed0" type="fixed">
+      <parent link="world"/>
+      <child link="base_dual_arm"/>
+      <origin xyz="-0.0 -1.500 0.24" rpy="-1.57 -3.14 0"/>
+  </joint>
+
+  <joint name="fixed1" type="fixed">
+      <parent link="base_dual_arm"/>
+      <child link="robot2_base_link"/>
+      <origin xyz="0.2725 0.2294 0.705" rpy="0 0 -1.57"/>
+  </joint>
+
+  <joint name="fixed2" type="fixed">
+      <parent link="base_dual_arm"/>
+      <child link="robot1_base_link"/>
+      <origin xyz="-0.3098 0.2294 0.705" rpy="0.0 0.0 0.0"/>
+  </joint>  
+
+  <joint name="fixed3" type="fixed">
+      <parent link="robot2_wrist3_link"/>
+      <child link="end2"/>
+      <origin xyz="-0.00 -0.00 0.11 " rpy="0  0.0 3.14159"/>
+  </joint>
+
+  <joint name="fixed4" type="fixed">
+      <parent link="robot1_wrist3_link"/>
+      <child link="end1"/>
+      <origin xyz="-0.00 -0.0 0.101" rpy="-3.14 0.0 0.0"/>
+  </joint>  
+
+  <joint name="fixed5" type="fixed">
+      <parent link="robot2_wrist3_link"/>
+      <child link="tcp2"/>
+      <origin xyz="-0.0 -0.0 0.106 " rpy="0  0  0"/>
+  </joint>
+
+  <joint name="fixed6" type="fixed">
+      <parent link="robot1_wrist3_link"/>
+      <child link="tcp1"/>
+      <origin xyz="-0.0 -0.0 0.10" rpy="0.0 0.0  0.0"/>
+  </joint>  
+
+  <link
+    name="robot2_base_link">
+    <inertial>
+      <origin
+        xyz="-0.00017171 -0.00016075 0.041272"
+        rpy="0 0 0" />
+      <mass
+        value="1.6231" />
+      <inertia
+        ixx="0.0039513"
+        ixy="1.1032E-05"
+        ixz="-1.0078E-05"
+        iyy="0.0039509"
+        iyz="-9.408E-06"
+        izz="0.0063729" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find fairino_description)/meshes/fairino16_v6/base_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.89804 0.91765 0.92941 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find fairino_description)/meshes/fairino16_v6/base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="robot2_shoulder_link">
+    <inertial>
+      <origin
+        xyz="2.6949E-07 -0.0077161 0.17504"
+        rpy="0 0 0" />
+      <mass
+        value="3.7152" />
+      <inertia
+        ixx="0.015538"
+        ixy="-6.8007E-08"
+        ixz="-8.8038E-08"
+        iyy="0.014566"
+        iyz="0.00023847"
+        izz="0.012006" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find fairino_description)/meshes/fairino16_v6/shoulder_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.89804 0.91765 0.92941 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find fairino_description)/meshes/fairino16_v6/shoulder_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="robot2_j1"
+    type="revolute">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="robot2_base_link" />
+    <child
+      link="robot2_shoulder_link" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-3.0543"
+      upper="3.0543"
+      effort="150"
+      velocity="3.15" />
+    <calibration
+      rising="0"
+      falling="0" />
+    <dynamics
+      damping="0"
+      friction="0" />
+    <safety_controller
+      soft_upper_limit="3.0543261"
+      soft_lower_limit="-3.0543261"
+      k_position="100.0"
+      k_velocity="40.0" />
+  </joint>
+  <link
+    name="robot2_upperarm_link">
+    <inertial>
+      <origin
+        xyz="-0.20845 -1.0388E-06 0.18245"
+        rpy="0 0 0" />
+      <mass
+        value="9.4622" />
+      <inertia
+        ixx="0.025921"
+        ixy="2.097E-07"
+        ixz="0.0025747"
+        iyy="0.37903"
+        iyz="1.3969E-07"
+        izz="0.37439" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find fairino_description)/meshes/fairino16_v6/upperarm_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.89804 0.91765 0.92941 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find fairino_description)/meshes/fairino16_v6/upperarm_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="robot2_j2"
+    type="revolute">
+    <origin
+      xyz="0 0 0.18"
+      rpy="1.5708 0 0" />
+    <parent
+      link="robot2_shoulder_link" />
+    <child
+      link="robot2_upperarm_link" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-4.6251"
+      upper="1.4835"
+      effort="150"
+      velocity="3.15" />
+    <calibration
+      rising="0"
+      falling="0" />
+    <dynamics
+      damping="0"
+      friction="0" />
+    <safety_controller
+      soft_upper_limit="3.0543261"
+      soft_lower_limit="-3.0543261"
+      k_position="100.0"
+      k_velocity="40.0" />
+  </joint>
+  <link
+    name="robot2_forearm_link">
+    <inertial>
+      <origin
+        xyz="-0.23441 5.6569E-07 0.048131"
+        rpy="0 0 0" />
+      <mass
+        value="2.9964" />
+      <inertia
+        ixx="0.003827"
+        ixy="-1.6004E-07"
+        ixz="-0.0011373"
+        iyy="0.054019"
+        iyz="-5.5129E-08"
+        izz="0.053512" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find fairino_description)/meshes/fairino16_v6/forearm_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.89804 0.91765 0.92941 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find fairino_description)/meshes/fairino16_v6/forearm_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="robot2_j3"
+    type="revolute">
+    <origin
+      xyz="-0.52 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="robot2_upperarm_link" />
+    <child
+      link="robot2_forearm_link" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-2.8274"
+      upper="2.8274"
+      effort="150"
+      velocity="3.15" />
+    <calibration
+      rising="0"
+      falling="0" />
+    <dynamics
+      damping="0"
+      friction="0" />
+    <safety_controller
+      soft_upper_limit="3.0543261"
+      soft_lower_limit="-3.0543261"
+      k_position="100.0"
+      k_velocity="40.0" />
+  </joint>
+  <link
+    name="robot2_wrist1_link">
+    <inertial>
+      <origin
+        xyz="2.4949E-07 -0.002597 0.1549"
+        rpy="0 0 0" />
+      <mass
+        value="2.1573" />
+      <inertia
+        ixx="0.0033086"
+        ixy="1.2835E-08"
+        ixz="6.0662E-08"
+        iyy="0.0024933"
+        iyz="3.9256E-05"
+        izz="0.003143" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find fairino_description)/meshes/fairino16_v6/wrist1_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.89804 0.91765 0.92941 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find fairino_description)/meshes/fairino16_v6/wrist1_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="robot2_j4"
+    type="revolute">
+    <origin
+      xyz="-0.4 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="robot2_forearm_link" />
+    <child
+      link="robot2_wrist1_link" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-4.6251"
+      upper="1.4835"
+      effort="28"
+      velocity="3.2" />
+    <calibration
+      rising="0"
+      falling="0" />
+    <dynamics
+      damping="0"
+      friction="0" />
+    <safety_controller
+      soft_upper_limit="3.0543261"
+      soft_lower_limit="-3.0543261"
+      k_position="100.0"
+      k_velocity="40.0" />
+  </joint>
+  <link
+    name="robot2_wrist2_link">
+    <inertial>
+      <origin
+        xyz="-2.4949E-07 0.002597 0.1099"
+        rpy="0 0 0" />
+      <mass
+        value="2.1573" />
+      <inertia
+        ixx="0.0033086"
+        ixy="1.2835E-08"
+        ixz="-6.0662E-08"
+        iyy="0.0024933"
+        iyz="-3.9256E-05"
+        izz="0.003143" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find fairino_description)/meshes/fairino16_v6/wrist2_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.89804 0.91765 0.92941 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find fairino_description)/meshes/fairino16_v6/wrist2_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="robot2_j5"
+    type="revolute">
+    <origin
+      xyz="0 0 0.159"
+      rpy="1.5708 0 0" />
+    <parent
+      link="robot2_wrist1_link" />
+    <child
+      link="robot2_wrist2_link" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-3.0543"
+      upper="3.0543"
+      effort="28"
+      velocity="3.2" />
+    <calibration
+      rising="0"
+      falling="0" />
+    <dynamics
+      damping="0"
+      friction="0" />
+    <safety_controller
+      soft_upper_limit="3.0543261"
+      soft_lower_limit="-3.0543261"
+      k_position="100.0"
+      k_velocity="40.0" />
+  </joint>
+  <link
+    name="robot2_wrist3_link">
+    <inertial>
+      <origin
+        xyz="-8.7063E-06 -3.2122E-05 0.082426"
+        rpy="0 0 0" />
+      <mass
+        value="0.20145" />
+      <inertia
+        ixx="0.0001117"
+        ixy="9.1303E-11"
+        ixz="6.3367E-09"
+        iyy="0.00011182"
+        iyz="9.9213E-08"
+        izz="0.00016776" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find fairino_description)/meshes/fairino16_v6/wrist3_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.89804 0.91765 0.92941 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find fairino_description)/meshes/fairino16_v6/wrist3_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="robot2_j6"
+    type="revolute">
+    <origin
+      xyz="0 0 0.114"
+      rpy="-1.5708 0 0" />
+    <parent
+      link="robot2_wrist2_link" />
+    <child
+      link="robot2_wrist3_link" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-3.0543"
+      upper="3.0543"
+      effort="28"
+      velocity="3.2" />
+    <calibration
+      rising="0"
+      falling="0" />
+    <dynamics
+      damping="0"
+      friction="0" />
+    <safety_controller
+      soft_upper_limit="3.0543261"
+      soft_lower_limit="-3.0543261"
+      k_position="100.0"
+      k_velocity="40.0" />
+  </joint>
+
+
+
+
+
+
+
+
+
+
+
+
+  <link
+    name="robot1_base_link">
+    <inertial>
+      <origin
+        xyz="-0.00031896 -0.00029673 0.042463"
+        rpy="0 0 0" />
+      <mass
+        value="1.6185" />
+      <inertia
+        ixx="0.0030836"
+        ixy="1.5354E-05"
+        ixz="-1.9315E-05"
+        iyy="0.0030825"
+        iyz="-1.7918E-05"
+        izz="0.0045209" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find fairino_description)/meshes/fairino5_v6/base_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.89804 0.91765 0.92941 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find fairino_description)/meshes/fairino5_v6/base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="robot1_shoulder_link">
+    <inertial>
+      <origin
+        xyz="5.0029E-07 -0.0040922 0.14629"
+        rpy="0 0 0" />
+      <mass
+        value="4.3771" />
+      <inertia
+        ixx="0.010731"
+        ixy="-8.0587E-09"
+        ixz="-3.6773E-08"
+        iyy="0.010408"
+        iyz="0.00012853"
+        izz="0.0081793" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find fairino_description)/meshes/fairino5_v6/shoulder_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.89804 0.91765 0.92941 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find fairino_description)/meshes/fairino5_v6/shoulder_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="robot1_j1"
+    type="revolute">
+    <origin
+      xyz="0 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="robot1_base_link" />
+    <child
+      link="robot1_shoulder_link" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-3.0543"
+      upper="3.0543"
+      effort="150"
+      velocity="3.15" />
+    <calibration
+      rising="0"
+      falling="0" />
+    <dynamics
+      damping="0"
+      friction="0" />
+    <safety_controller
+      soft_lower_limit="-3.0543"
+      soft_upper_limit="3.0543"
+      k_position="15"
+      k_velocity="10" />
+  </joint>
+  <link
+    name="robot1_upperarm_link">
+    <inertial>
+      <origin
+        xyz="-0.2125 -5.7643E-09 0.1346"
+        rpy="0 0 0" />
+      <mass
+        value="14.458" />
+      <inertia
+        ixx="0.028392"
+        ixy="-1.337E-07"
+        ixz="-3.9895E-09"
+        iyy="0.4559"
+        iyz="4.214E-08"
+        izz="0.44974" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find fairino_description)/meshes/fairino5_v6/upperarm_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.89804 0.91765 0.92941 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find fairino_description)/meshes/fairino5_v6/upperarm_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="robot1_j2"
+    type="revolute">
+    <origin
+      xyz="0 0 0.152"
+      rpy="1.5708 0 0" />
+    <parent
+      link="robot1_shoulder_link" />
+    <child
+      link="robot1_upperarm_link" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-4.6251"
+      upper="1.4835"
+      effort="150"
+      velocity="3.15" />
+    <calibration
+      rising="0"
+      falling="0" />
+    <dynamics
+      damping="0"
+      friction="0" />
+    <safety_controller
+      soft_lower_limit="-4.6251"
+      soft_upper_limit="1.4835"
+      k_position="15"
+      k_velocity="10" />
+  </joint>
+  <link
+    name="robot1_forearm_link">
+    <inertial>
+      <origin
+        xyz="-0.18793 -8.4503E-07 0.0066357"
+        rpy="0 0 0" />
+      <mass
+        value="7.6737" />
+      <inertia
+        ixx="0.0085096"
+        ixy="2.1613E-06"
+        ixz="-0.0068678"
+        iyy="0.16971"
+        iyz="3.7086E-08"
+        izz="0.16854" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find fairino_description)/meshes/fairino5_v6/forearm_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.89804 0.91765 0.92941 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find fairino_description)/meshes/fairino5_v6/forearm_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="robot1_j3"
+    type="revolute">
+    <origin
+      xyz="-0.425 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="robot1_upperarm_link" />
+    <child
+      link="robot1_forearm_link" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-2.8274"
+      upper="2.8274"
+      effort="150"
+      velocity="3.15" />
+    <calibration
+      rising="0"
+      falling="0" />
+    <dynamics
+      damping="0"
+      friction="0" />
+    <safety_controller
+      soft_lower_limit="-2.8274"
+      soft_upper_limit="2.8274"
+      k_position="15"
+      k_velocity="10" />
+  </joint>
+  <link
+    name="robot1_wrist1_link">
+    <inertial>
+      <origin
+        xyz="4.98E-07 -0.003754 0.097155"
+        rpy="0 0 0" />
+      <mass
+        value="1.6266" />
+      <inertia
+        ixx="0.00216"
+        ixy="4.888E-09"
+        ixz="3.1528E-08"
+        iyy="0.0015455"
+        iyz="3.7678E-05"
+        izz="0.0019902" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find fairino_description)/meshes/fairino5_v6/wrist1_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.89804 0.91765 0.92941 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find fairino_description)/meshes/fairino5_v6/wrist1_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="robot1_j4"
+    type="revolute">
+    <origin
+      xyz="-0.39501 0 0"
+      rpy="0 0 0" />
+    <parent
+      link="robot1_forearm_link" />
+    <child
+      link="robot1_wrist1_link" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-4.6251"
+      upper="1.4835"
+      effort="28"
+      velocity="3.2" />
+    <calibration
+      rising="0"
+      falling="0" />
+    <dynamics
+      damping="0"
+      friction="0" />
+    <safety_controller
+      soft_lower_limit="-4.6251"
+      soft_upper_limit="1.4835"
+      k_position="15"
+      k_velocity="10" />
+  </joint>
+  <link
+    name="robot1_wrist2_link">
+    <inertial>
+      <origin
+        xyz="-4.5588E-07 0.0038617 0.098257"
+        rpy="0 0 0" />
+      <mass
+        value="1.5812" />
+      <inertia
+        ixx="0.0020612"
+        ixy="8.7064E-09"
+        ixz="-3.4742E-08"
+        iyy="0.0014477"
+        iyz="-2.8534E-05"
+        izz="0.0019573" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find fairino_description)/meshes/fairino5_v6/wrist2_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.89804 0.91765 0.92941 1" />
+      </material>
+    </visual>
+    <collision>
+      <origins
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find fairino_description)/meshes/fairino5_v6/wrist2_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="robot1_j5"
+    type="revolute">
+    <origin
+      xyz="0 0 0.1021"
+      rpy="1.5708 0 0" />
+    <parent
+      link="robot1_wrist1_link" />
+    <child
+      link="robot1_wrist2_link" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-2.5543"
+      upper="3.0543"
+      effort="28"
+      velocity="3.2" />
+    <calibration
+      rising="0"
+      falling="0" />
+    <dynamics
+      damping="0"
+      friction="0" />
+    <safety_controller
+      soft_lower_limit="-2.5543"
+      soft_upper_limit="3.0543"
+      k_position="15"
+      k_velocity="10" />
+  </joint>
+  <link
+    name="robot1_wrist3_link">
+    <inertial>
+      <origin
+        xyz="7.7496E-05 1.7751E-05 0.076122"
+        rpy="0 0 0" />
+      <mass
+        value="0.52542" />
+      <inertia
+        ixx="0.00027721"
+        ixy="-1.8677E-09"
+        ixz="-1.188E-07"
+        iyy="0.00027839"
+        iyz="2.2607E-07"
+        izz="0.00041605" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find fairino_description)/meshes/fairino5_v6/wrist3_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.89804 0.91765 0.92941 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="file://$(find fairino_description)/meshes/fairino5_v6/wrist3_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="robot1_j6"
+    type="revolute">
+    <origin
+      xyz="0 0 0.102"
+      rpy="-1.5708 0 0" />
+    <parent
+      link="robot1_wrist2_link" />
+    <child
+      link="robot1_wrist3_link" />
+    <axis
+      xyz="0 0 1" />
+    <limit
+      lower="-3.0543"
+      upper="3.0543"
+      effort="28"
+      velocity="3.2" />
+    <calibration
+      rising="0"
+      falling="0" />
+    <dynamics
+      damping="0"
+      friction="0" />
+    <safety_controller
+      soft_lower_limit="-3.0543"
+      soft_upper_limit="3.0543"
+      k_position="15"
+      k_velocity="10" />
+  </joint>
+
+
+</robot>
